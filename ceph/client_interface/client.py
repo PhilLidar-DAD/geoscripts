@@ -18,21 +18,12 @@ warnings.simplefilter("ignore")
     
 class CephStorageClient(object):
     
-    def __init__(self, user=None, key=None, ceph_radosgw_url=None, container_name=None):
-        if user=None:
-            self.user = "geonode"
-        else:
-            self.user = user
+    def __init__(self, user, key, ceph_radosgw_url, container_name=None):
+        self.user = user
             
-        if user=None:
-            self.key = "Ry3meRcVwVkff3G2O1vSy0PmUvUcXCzvWNZic04B"
-        else:
-            self.key = key
+        self.key = key
         
-        if ceph_radosgw_url=None:
-            self.ceph_radosgw_url = "https://cephclient.phil-lidar1.tld"
-        else:
-            self.ceph_radosgw_url = ceph_radosgw_url
+        self.ceph_radosgw_url = ceph_radosgw_url
         
         self.connection = self.__connect()
         
@@ -50,6 +41,7 @@ class CephStorageClient(object):
         )
     
     def list_containers(self):
+        pprint(self.connection.get_account()[1])
         return list(self.connection.get_account()[1])
     
     def set_active_container(self, container_name):
@@ -69,12 +61,12 @@ class CephStorageClient(object):
         
         content_type="None"
         try:
-            content_type = mimetypes.types_map["."+f.split(".")[-1]]
+            content_type = mimetypes.types_map["."+file_name.split(".")[-1]]
         
         except KeyError:
             pass
         
-        self.log("Uploading  file {0} [size:{1} | type:{2}]...".format( file_name,
+        self.log.info("Uploading  file {0} [size:{1} | type:{2}]...".format( file_name,
                                                                         os.stat(file_path).st_size,
                                                                         content_type))
         with open(file_path, 'r') as file_obj:
@@ -84,7 +76,7 @@ class CephStorageClient(object):
                                         content_type=content_type)
         
     
-    def upload_via_rest(self):
+    def upload_via_http(self):
         pass
     
     def download_file_to_path(self, object_name, destination_path, container=None):
@@ -96,25 +88,37 @@ class CephStorageClient(object):
         with open(file_path, 'w') as dl_file:
                 dl_file.write(obj_tuple[1])
                 
-        self.log("Finished downloading to [{0}]. Wrote [{1}] bytes...".format(  file_path,
-                                                                                os.stat(file_path).st_size,)
+        self.log.info("Finished downloading to [{0}]. Wrote [{1}] bytes...".format(  file_path,
+                                                                                os.stat(file_path).st_size,))
     
-    def download_via_rest(self):
+    def download_via_http(self):
         pass
     
+    def close_connection(self):
+        self.connection.close()
+    
+    def get_cwd(self):
+        """
+            Returns the current working directory of the python script
+        """
+        path = os.path.realpath(__file__)
+        if "?" in path:
+            return path.rpartition("?")[0].rpartition("/")[0]+"/"
+        else:
+            return path.rpartition("/")[0]+"/"
     
     def log_wrapper(self):
         """
         Wrapper to set logging parameters for output
         """
+        # Initialize logging
+        logging.basicConfig(filename=self.get_cwd()+'logs/ceph_storage.log',level=logging.DEBUG)
+        self.LOGGING = True
         log = logging.getLogger('client.py')
-
+        
         # Set the log format and log level
-        try:
-            debug = self.params["debug"]
-            log.setLevel(logging.DEBUG)
-        except KeyError as e:
-            log.setLevel(logging.INFO)
+        log.setLevel(logging.DEBUG)
+        #log.setLevel(logging.INFO)
 
         # Set the log format.
         stream = logging.StreamHandler()
