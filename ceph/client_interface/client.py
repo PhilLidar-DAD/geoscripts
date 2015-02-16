@@ -50,8 +50,11 @@ class CephStorageClient(object):
     def get_active_container(self):
         return self.active_container_name
     
-    def list_files(self, container_name):
-        return list(self.connection.get_container(container_name)[1])
+    def list_files(self, container_name=None):
+        if container_name is not None:
+            return list(self.connection.get_container(container_name)[1])
+        else:
+            return list(self.connection.get_container(self.active_container_name)[1])
     
     def upload_file_from_path(self, file_path, container=None):
         file_name = os.path.basename(file_path)
