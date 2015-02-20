@@ -1,0 +1,49 @@
+river basins,dem,mkp,ortho
+Agusan,922.92,0.00,0.00
+Aklan/Capiz,1039.51,0.00,0.00
+Albay,839.42,0.00,0.00
+Bataan/Zambales,2150.43,0.00,0.00
+Bicol,1310.43,0.00,0.00
+Bohol,2292.66,0.00,0.00
+Boracay,43.35,0.00,0.00
+Buayan,537.74,0.00,0.00
+CDO/Iponan,1527.71,0.00,0.00
+Calabarzon,3333.96,0.00,0.00
+Davao,281.72,0.00,0.00
+Ilo-ilo/Antique,270.34,0.00,0.00
+Infanta,156.59,0.00,0.00
+Jalaur,1909.22,0.00,0.00
+Lucena,169.56,0.00,0.00
+MIA,411.35,0.00,0.00
+Mag-asawang Tubig,790.47,0.00,0.00
+Masbate,3316.58,0.00,0.00
+Mindanao,691.42,0.00,0.00
+Occidental Mindoro,1591.57,0.00,0.00
+Oriental Mindoro,1104.39,0.00,0.00
+Pampanga/Agno,10320.73,0.00,0.00
+Panay,1538.23,0.00,0.00
+Tacloban,514.79,0.00,0.00
+Tagoloan,354.91,0.00,0.00
+Tagum-Hijo,2115.79,0.00,0.00
+
+
+Unmatched layers:
+geonode:surigao_del_sur_block61j
+geonode:pl2_sucs
+geonode:pl1_sucs
+geonode:pl1_283fps
+geonode:ortho_dipolog_73b_20150120
+geonode:ortho_dipolog_70d_20150108
+geonode:ortho_dipolog_70abc_20150126
+geonode:ortho_dipolog_69f_20150113
+geonode:ortho_dipolog_69e_20141212
+geonode:ortho_dipolog_69d_20150120
+geonode:ortho_dipolog_69c_20141219
+geonode:ortho_dipolog_69b_20150203
+geonode:ortho_coverage_asof20150102
+geonode:nmindanao71_ext_test
+geonode:nmindanao71_ext_merge_test
+geonode:nmindanao71_ext_112114_test
+geonode:index
+geonode:dipolog_block73abc
+geonode:dipolog_block73a

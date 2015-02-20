@@ -1,0 +1,88 @@
+{
+	"collation_keys": {
+		"Aklan/Capiz": [
+			"aklan_capiz"
+		],
+        "Agusan": [
+            "agusan"
+        ],
+        "Albay": [
+            "albay"
+        ],
+		"Bataan/Zambales": [
+			"bataan_zambales"
+		],
+		"Bicol": [
+			"bicol"
+		],
+		"Bohol": [
+			"bohol"
+		],
+		"Boracay": [
+			"boracay"
+		],
+		"Buayan": [
+			"buayan"
+		],
+		"CDO/Iponan": [
+			"cdo_iponan"
+		],
+		"Calabarzon": [
+			"calabarzon"
+		],
+		"Davao": [
+			"davao"
+		],
+		"Ilo-ilo/Antique": [
+			"iloilo_antique"
+		],
+		"Infanta": [
+			"infanta"
+		],
+		"Jalaur": [
+			"jalaur"
+		],
+		"Lucena": [
+			"lucena"
+		],
+		"MIA": [
+			"mia"
+		],
+		"Mag-asawang Tubig": [
+			"magasawang_tubig"
+		],
+		"Masbate": [
+			"masbate"
+		],
+		"Mindanao": [
+			"mindanao"
+		],
+		"Occidental Mindoro": [
+			"occidental_mindoro"
+		],
+		"Oriental Mindoro": [
+			"oriental_mindoro"
+		],
+		"Pampanga/Agno": [
+			"pampanga_agno"
+		],
+		"Panay": [
+			"panay"
+		],
+		"Tacloban": [
+			"tacloban"
+		],
+		"Tagoloan": [
+			"tagoloan"
+		],
+		"Tagum-Hijo": [
+			"tagum_hijo"
+		]
+	},
+	"coverage_types": [
+		"dem",
+		"ortho",
+		"mkp"
+	],
+    "workspace": "geonode"
+}
