@@ -29,7 +29,7 @@ try:
     print "====================="
 
     container_name = 'data-container'
-     
+    obj_container = conn.get_container(container_name) 
     print "\nList of Files inside container '{0}':".format(container_name)
     print "=========================="
     output_folder="/root/out/"
