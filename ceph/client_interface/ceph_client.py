@@ -75,6 +75,8 @@ class CephStorageClient(object):
                                         contents=file_obj.read(),
                                         content_type=content_type)
         
+        return file_name
+        
     
     def upload_via_http(self):
         pass

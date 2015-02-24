@@ -1,6 +1,10 @@
 from threading import Thread, Condition
 import time
 import random
+from ceph_client import CephStorageClient
+
+from os import listdir
+from os.path import isfile, isdir, join
 
 ###############
 ### CLASSES ###
@@ -8,19 +12,29 @@ import random
 
 class CephObjectProducer(Thread):
     
-    def __init__(self, queue_condition, uploaded_objects_queue):
+    def __init__(self, ceph_client, files_source_dir, queue_condition, uploaded_objects_queue):
         super(CephObjectProducer, self).__init__()
-        self.obj_queue = uploaded_objects_queue
-        self.condition = queue_condition
+        self.obj_queue          = uploaded_objects_queue
+        self.condition          = queue_condition
+        self.ceph_client        = ceph_client
+        self.files_source_dir   = files_source_dir
         
     def run(self):
-        nums = range(5) #Will create the list [0, 1, 2, 3, 4]
-        while True:
-            num = random.choice(nums) #Selects a random number from list [0, 1, 2, 3, 4]
-            self.produce_object(num)
-            time.sleep(random.random()*2)
+        #Connect to Ceph Storage
+        self.ceph_client.connect()
+        
+        for path, subdirs, files in walk(files_source_dir):
+            for name in files:
+                #Upload each file
+                grid_ref = path.rsplit("/")[-1]
+                file_path = join(path, name)
+                self.produce_object(file_path, grid_ref)
             
-    def produce_object(self, obj):
+        #Close Ceph Connection
+        self.ceph_client.connect()
+            
+            
+    def produce_object(self, filepath, grid_ref):
         """
             Uploads object to Ceph Object Storage and adds the object's 
              name/ID to the uploaded_objects_queue
@@ -32,10 +46,16 @@ class CephObjectProducer(Thread):
         """
         self.condition.acquire()
         try:
-            self.obj_queue.append(obj)
-            print "Produced", obj
+            obj_id = self.ceph_client.upload_file_from_path(filepath)
+            obj_tpl = (obj_id, grid_ref)
+            self.obj_queue.append(obj_tpl)
+            print "Produced", obj_tpl
             
+            #Notify consumers waiting on condition
             self.condition.notify()
+        except Exception as e:
+            #HERE
+            print("An error occurred!\n{0}".format(e))
         finally:
             self.condition.release()
 
@@ -74,20 +94,4 @@ class GeonodeMapperConsumer(Thread):
         print "Consumed", obj
         
         self.condition.release()
-        
-        
 
-
-########################
-###  MAIN LOOP CALL  ###
-########################
-
-uploaded_objects_queue = []
-queue_condition = Condition()
-
-prod = CephObjectProducer(queue_condition, uploaded_objects_queue)
-cons = GeonodeMapperConsumer(queue_condition, uploaded_objects_queue)
-
-
-cons.start()
-prod.start()
