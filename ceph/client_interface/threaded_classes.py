@@ -5,6 +5,7 @@ from ceph_client import CephStorageClient
 
 from os import listdir, walk
 from os.path import isfile, isdir, join
+from pprint import pprint
 
 ###############
 ### CLASSES ###
@@ -28,8 +29,7 @@ class CephObjectProducer(Thread):
                 #Upload each file
                 grid_ref = path.rsplit("/")[-1]
                 file_path = join(path, name)
-                print(self.ceph_client.get_active_container())
-                #self.produce_object(file_path, grid_ref)
+                self.produce_object(file_path, grid_ref)
         
         print("Uploaded Objects Queue:")
         print("=======================")
