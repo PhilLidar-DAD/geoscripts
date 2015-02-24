@@ -22,17 +22,17 @@ class CephStorageClient(object):
         
         self.ceph_radosgw_url = ceph_radosgw_url
         
-        self.connection = self.__connect()
+        #self.connection = self.__connect()
         
         self.active_container_name = container_name
         
         self.log = self.log_wrapper()
 
     
-    def __connect(self):
-        return swiftclient.Connection(
-            user=user,
-            key=key,
+    def connect(self):
+        self.connection = swiftclient.Connection(
+            user=self.user,
+            key=self.key,
             authurl=self.ceph_radosgw_url+"/auth",
             insecure=True,
         )
