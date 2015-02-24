@@ -22,7 +22,7 @@ warnings.simplefilter("ignore")
 
 uploaded_objects_queue = []
 queue_condition = Condition()
-ceph_client = CephStorageClient(ceph_user, ceph_key, ceph_ogw_url)
+ceph_client = CephStorageClient(ceph_user, ceph_key, ceph_ogw_url, container_name='geo-container')
 grid_files_dir = "/home/geonode/grid_data"
 
 prod = CephObjectProducer(ceph_client, grid_files_dir, queue_condition, uploaded_objects_queue)
