@@ -25,30 +25,23 @@ try:
     for container in conn.get_account()[1]:
         print container["name"]
         pprint(container)
+        #conn.delete_container(container['name'])
         
     print "====================="
 
-    container_name = 'data-container'
+    container_name = 'geo-container'
     obj_container = conn.get_container(container_name) 
     print "\nList of Files inside container '{0}':".format(container_name)
     print "=========================="
     output_folder="/root/out/"
     for data in obj_container[1]:
-        print 'Found: {0}\t{1}\t{2}'.format(data['name'], data['bytes'], data['last_modified'])
+        #print 'Found: {0}\t{1}\t{2}'.format(data['name'], data['bytes'], data['last_modified'])
+        print str(data)
         
-        print 'Downloading a copy...'
-        obj_tuple = conn.get_object(container_name, data['name'])
-        with open(output_folder+data['name'], 'w') as test_obj_dl:
-                test_obj_dl.write(obj_tuple[1])
-                
-        print 'Finished downloading. Deleting object in container...'
-        conn.delete_object(container_name, data['name'])
+        #print 'Finished downloading. Deleting object in container...'
+        #conn.delete_object(container_name, data['name'])
     print "=========================="
     
-    
-    print "\nDeleting container '{0}':".format(container_name)
-    conn.delete_container(container_name)
-    print "===DONE==="
         
 finally:
     warnings.filters = original_filters
