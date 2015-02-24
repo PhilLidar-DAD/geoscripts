@@ -66,17 +66,23 @@ class CephStorageClient(object):
         except KeyError:
             pass
         
-        self.log.info("Uploading  file {0} [size:{1} | type:{2}]...".format( file_name,
-                                                                        os.stat(file_path).st_size,
-                                                                        content_type))
+        obj_meta_dict = {   'bytes': os.stat(file_path).st_size, 
+                            #'last_modified': None, 
+                            #'hash': None, 
+                            'name': file_name, 
+                            'content_type': content_type }
+        
+        self.log.info("Uploading  file {0} [size:{1} | type:{2}]...".format(    obj_meta_dict['name'],
+                                                                                obj_meta_dict['bytes'],
+                                                                                obj_meta_dict['content_type']))
+
         with open(file_path, 'r') as file_obj:
-            self.connection.put_object( container, 
+            etag = self.connection.put_object( container, 
                                         file_name,
                                         contents=file_obj.read(),
                                         content_type=content_type)
-        
-        return self.connection.head_object(container, file_name)
-        
+        obj_meta_dict['hash'] = etag[0]
+        return obj_meta_dict
     
     def upload_via_http(self):
         pass
