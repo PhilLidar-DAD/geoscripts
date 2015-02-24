@@ -96,8 +96,12 @@ class GeonodeMapperConsumer(Thread):
                 self.condition.wait()
                 print "Producer added something to queue and notified the consumer"
         
-        obj = self.obj_queue.pop(0)
-        print "Consumed", obj
+        obj_tpl = self.obj_queue.pop(0)
+        
+        #TODO:
+        #utils.create_mapping(*obj_tpl)
+        
+        print "Consumed", obj_tpl
         
         self.condition.release()
 

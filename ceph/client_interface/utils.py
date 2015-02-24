@@ -1,15 +1,20 @@
-from os import listdir, walk
-from os.path import isfile, isdir, join
-from pprint import pprint
+#!/usr/bin/env python
+import os, sys
 
-def list_all_files_in_subdirs(root_dir):
-    file_list = []
-    for path, subdirs, files in walk(files_source_dir):
-        for name in files:
-            grid_ref = path.rsplit("/")[-1]
-            file_list.append(join(path, name))
-    return file_list
+sys.path.append("/home/geonode/geonode-debian-2.4.0-beta22")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "geonode.settings")
+from django.core.management import execute_from_command_line
+execute_from_command_line(sys.argv)
 
-def get_gridref_from_fpath(fpath):
-    return fpath.rsplit("/")[-1]
+from geonode.cephgeo.models import CephDataObject, LayerToCephObjectMap
 
+def create_mapping(obj_name, grid_ref):
+    """
+        size_in_bytes   = models.IntegerField()
+        last_modified   = models.DateField()
+        file_hash       = models.CharField(max_length=30)
+        name            = models.CharField(max_length=100)
+        content_type    = models.CharField(max_length=20)
+        grid_ref        = models.CharField(max_length=10)
+    """
+    ceph_obj = CephDataObject(name="Fred Flintstone", shirt_size="L")
