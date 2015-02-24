@@ -32,10 +32,11 @@ try:
     obj_container = conn.get_container(container_name) 
     print "\nList of Files inside container '{0}':".format(container_name)
     print "=========================="
+    output_folder="/root/out/"
     for data in obj_container[1]:
-        print 'Found: {0}\t{1}\t{2}'.format(data['name'], data['bytes'], data['last_modified'])
-        print "Deleting..."
-        conn.delete_object(container_name, data['name'])
+        #print 'Found: {0}\t{1}\t{2}'.format(data['name'], data['bytes'], data['last_modified'])
+        print str(data)
+                
     print "=========================="
     
     
