@@ -9,7 +9,7 @@ from os.path import isfile, join
 
 ceph_user = 'geonode:swift'
 ceph_key = ***REMOVED***
-ceph_ogw_url = 'https://cephclient.phil-lidar1.tld'
+ceph_ogw_url = 'https://cephclient.lan.dream.upd.edu.ph'
 
 original_filters = warnings.filters[:]
 

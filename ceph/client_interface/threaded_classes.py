@@ -3,7 +3,7 @@ import time
 import random
 from ceph_client import CephStorageClient
 
-from os import listdir
+from os import listdir, walk
 from os.path import isfile, isdir, join
 
 ###############
@@ -23,12 +23,13 @@ class CephObjectProducer(Thread):
         #Connect to Ceph Storage
         self.ceph_client.connect()
         
-        for path, subdirs, files in walk(files_source_dir):
+        for path, subdirs, files in walk(self.files_source_dir):
             for name in files:
                 #Upload each file
                 grid_ref = path.rsplit("/")[-1]
                 file_path = join(path, name)
-                self.produce_object(file_path, grid_ref)
+                print(self.ceph_client.get_active_container())
+                #self.produce_object(file_path, grid_ref)
             
         #Close Ceph Connection
         self.ceph_client.connect()
