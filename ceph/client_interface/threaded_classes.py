@@ -30,7 +30,12 @@ class CephObjectProducer(Thread):
                 file_path = join(path, name)
                 print(self.ceph_client.get_active_container())
                 #self.produce_object(file_path, grid_ref)
-            
+        
+        print("Uploaded Objects Queue:")
+        print("=======================")
+        pprint(self.obj_queue)
+        print("=======================")
+        
         #Close Ceph Connection
         self.ceph_client.connect()
             
