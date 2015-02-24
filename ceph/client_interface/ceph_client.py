@@ -22,17 +22,17 @@ class CephStorageClient(object):
         
         self.ceph_radosgw_url = ceph_radosgw_url
         
-        self.connection = self.__connect()
+        #self.connection = self.__connect()
         
         self.active_container_name = container_name
         
         self.log = self.log_wrapper()
 
     
-    def __connect(self):
-        return swiftclient.Connection(
-            user=user,
-            key=key,
+    def connect(self):
+        self.connection = swiftclient.Connection(
+            user=self.user,
+            key=self.key,
             authurl=self.ceph_radosgw_url+"/auth",
             insecure=True,
         )
@@ -70,12 +70,12 @@ class CephStorageClient(object):
                                                                         os.stat(file_path).st_size,
                                                                         content_type))
         with open(file_path, 'r') as file_obj:
-            self.connection.put_object( container, 
+            return self.connection.put_object( container, 
                                         file_name,
                                         contents=file_obj.read(),
                                         content_type=content_type)
         
-        return file_name
+        #return self.connection.get_object(container, file_name)
         
     
     def upload_via_http(self):
