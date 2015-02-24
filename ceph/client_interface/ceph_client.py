@@ -70,12 +70,12 @@ class CephStorageClient(object):
                                                                         os.stat(file_path).st_size,
                                                                         content_type))
         with open(file_path, 'r') as file_obj:
-            return self.connection.put_object( container, 
+            self.connection.put_object( container, 
                                         file_name,
                                         contents=file_obj.read(),
                                         content_type=content_type)
         
-        #return self.connection.get_object(container, file_name)
+        return self.connection.get_object(container, file_name)
         
     
     def upload_via_http(self):
