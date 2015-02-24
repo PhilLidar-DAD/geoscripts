@@ -81,7 +81,7 @@ class CephStorageClient(object):
                                         file_name,
                                         contents=file_obj.read(),
                                         content_type=content_type)
-        obj_meta_dict['hash'] = etag[0]
+        obj_meta_dict['hash'] = etag
         return obj_meta_dict
     
     def upload_via_http(self):
