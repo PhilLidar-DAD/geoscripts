@@ -31,11 +31,11 @@ class CephObjectProducer(Thread):
                 grid_ref = path.rsplit("/")[-1]
                 file_path = join(path, name)
                 self.produce_object(file_path, grid_ref)
+                print("Uploaded Objects Queue:")
+                print("=======================")
+                pprint(self.obj_queue)
+                print("=======================")
         
-        print("Uploaded Objects Queue:")
-        print("=======================")
-        pprint(self.obj_queue)
-        print("=======================")
         
         #Close Ceph Connection
         self.ceph_client.connect()
@@ -103,6 +103,9 @@ class GeonodeMapperConsumer(Thread):
         geoclient.create_mapping(*obj_tpl)
         
         print "Consumed", obj_tpl
-        
+        print("Uploaded Objects Queue:")
+        print("=======================")
+        pprint(self.obj_queue)
+        print("=======================")
         self.condition.release()
 
