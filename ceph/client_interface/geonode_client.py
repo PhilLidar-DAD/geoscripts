@@ -34,6 +34,7 @@ def create_mapping(obj_meta_dict):
                                 file_hash=obj_meta_dict['hash'],
                                 grid_ref=obj_meta_dict['grid_ref'])
     #pprint Ceph Object
+    print("Saving CephDataObject instance:")
     pprint(ceph_obj)
 
     grid_ref=obj_meta_dict['grid_ref']
@@ -47,7 +48,7 @@ def create_mapping(obj_meta_dict):
     print("Identifying shapefile to map to..."   )
     for shapefile in list_of_shapefiles:
         grid_refs_per_shapefile[shapefile] = get_grid_refs(shapefile)
-        print("Shapefile[{0}] has [{1}] GRID_REFs.".format(shapefile, len(grid_refs_per_shapefile[shapefile]))
+        print("Shapefile [{0}] has [{1}] GRID_REFs.".format(shapefile, len(grid_refs_per_shapefile[shapefile]))
     
     #Identify which Shapefile Layer the tile's GRID_REF is included
     target_shapefile = None
