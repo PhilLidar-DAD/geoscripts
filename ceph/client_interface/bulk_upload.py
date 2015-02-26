@@ -29,5 +29,5 @@ prod = CephObjectProducer(ceph_client, grid_files_dir, queue_condition, uploaded
 cons = GeonodeMapperConsumer(queue_condition, uploaded_objects_queue)
 
 
-#cons.start()
+cons.start()
 prod.start()
