@@ -1,8 +1,8 @@
 #!/usr/bin/env python
+from __future__ import (absolute_import, division, print_function)
 import os, sys
 
 #OGC/WFS imports
-from __future__ import (absolute_import, division, print_function)
 from owslib.util import openURL
 from urllib import urlencode
 from pprint import pprint
@@ -19,7 +19,7 @@ from django.core.management import execute_from_command_line
 from geonode.cephgeo.models import CephDataObject, LayerToCephObjectMap
 from geonode.layers.models import Layer
 
-def create_mapping(obj_dict):
+def create_mapping(obj_meta_dict):
     """
         size_in_bytes   = models.IntegerField()
         file_hash       = models.CharField(max_length=30)
@@ -33,12 +33,15 @@ def create_mapping(obj_dict):
                                 content_type=obj_meta_dict['content_type'],
                                 file_hash=obj_meta_dict['hash'],
                                 grid_ref=obj_meta_dict['grid_ref'])
+    #pprint Ceph Object
+    pprint(ceph_obj)
+
     grid_ref=obj_meta_dict['grid_ref']
     ceph_obj.save()
     
     #TODO: Retrieve shapefile names from list of layers included in Map of grid Layers
     #For each Shapefile Layer in Map of Layers
-    list_of_shapefiles['geonode:index',]
+    list_of_shapefiles=['geonode:index',]
     grid_refs_per_shapefile = dict()
     
     for shapefile in list_of_shapefiles:

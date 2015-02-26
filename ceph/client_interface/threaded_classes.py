@@ -100,7 +100,7 @@ class GeonodeMapperConsumer(Thread):
         obj_dict = self.obj_queue.pop(0)
         
         #TODO:
-        geoclient.create_mapping(*obj_tpl)
+        geoclient.create_mapping(obj_dict)
         
         print "Consumed", obj_tpl
         print("Uploaded Objects Queue:")
