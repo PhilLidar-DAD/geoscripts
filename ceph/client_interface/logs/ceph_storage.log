@@ -243,3 +243,480 @@ DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/JE3404_ortho.tif H
 DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/JE3404_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667483191fd89b474df98f73ed54c87e9915da74067f8aa3a65a31d8a6895409d3a556bf296c"
 DEBUG:swiftclient:RESP STATUS: 201 Created
 DEBUG:swiftclient:RESP HEADERS: [('date', 'Tue, 24 Feb 2015 07:03:18 GMT'), ('transfer-encoding', 'chunked'), ('connection', 'close'), ('content-type', 'text/plain; charset=utf-8'), ('server', 'Apache/2.2.22 (Fedora)')]
+INFO:client.py:Uploading  file JE3403_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"GET /auth HTTP/1.1" 204 0
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/auth -X GET
+DEBUG:swiftclient:RESP STATUS: 204 No Content
+DEBUG:swiftclient:RESP HEADERS: [('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('x-storage-token', 'AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8'), ('date', 'Tue, 24 Feb 2015 07:23:07 GMT'), ('x-storage-url', 'https://cephclient.lan.dream.upd.edu.ph/swift/v1'), ('x-auth-token', 'AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8'), ('content-type', 'application/json')]
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3403_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3403_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '05bc8a0239ddb68c04eaa489772adf07'), ('date', 'Tue, 24 Feb 2015 07:23:07 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3403_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3403_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3403_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '1edddea753614e2760ebc546deb3e4d5'), ('date', 'Tue, 24 Feb 2015 07:23:09 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3403.laz [size:10363076 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3403.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3403.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '82731eb9cd2ce3b3ba893c0bea6005e6'), ('date', 'Tue, 24 Feb 2015 07:23:09 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3409_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3409_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3409_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '00bf0122b8baa3ca2175c0e602b90bef'), ('date', 'Tue, 24 Feb 2015 07:23:10 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3409_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3409_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3409_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '524f26771b90ccea598448b8b7a263b7'), ('date', 'Tue, 24 Feb 2015 07:23:10 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3409.laz [size:13631683 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3409.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3409.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '2ac56e07afed8737e778c83dd791db6a'), ('date', 'Tue, 24 Feb 2015 07:23:12 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3400.laz [size:6150441 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3400.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3400.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '5db37825e4c7870b01d23d60cbb55234'), ('date', 'Tue, 24 Feb 2015 07:23:13 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3400_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3400_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3400_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'afe27f3fb3cdc0e0f938595d5fe97f1f'), ('date', 'Tue, 24 Feb 2015 07:23:15 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3400_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3400_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3400_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'e6418f1f9deef64e29a7964f486a81cb'), ('date', 'Tue, 24 Feb 2015 07:23:16 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3402.laz [size:1772883 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3402.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3402.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '1bec3102a1ff8325727194471702680d'), ('date', 'Tue, 24 Feb 2015 07:23:17 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3402_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3402_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3402_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '7cc3540da9f1a851b95a8fe629706c49'), ('date', 'Tue, 24 Feb 2015 07:23:17 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3402_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3402_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3402_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '536131bf17206c288de33a26a28ef125'), ('date', 'Tue, 24 Feb 2015 07:23:18 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3406.laz [size:7653032 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3406.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3406.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '7806754905d264ad64b998e9cb00868f'), ('date', 'Tue, 24 Feb 2015 07:23:19 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3406_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3406_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3406_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'e0fc18996913890505e2d15cb5326f45'), ('date', 'Tue, 24 Feb 2015 07:23:20 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3406_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3406_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3406_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '986f0e64ed4a6a07022a1453f4cea7c7'), ('date', 'Tue, 24 Feb 2015 07:23:22 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3405.laz [size:7071399 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3405.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3405.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'ea92e17de094652e9188ac9998a998b8'), ('date', 'Tue, 24 Feb 2015 07:23:23 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3405_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3405_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3405_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'e39b2597c5ba45255f0c9a27e82fe25c'), ('date', 'Tue, 24 Feb 2015 07:23:24 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3405_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3405_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3405_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '0f6d43cad6ef293ed854d826f0bb4332'), ('date', 'Tue, 24 Feb 2015 07:23:24 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3407_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3407_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3407_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '2985bc1dc36f2d766e9629c3c7d8560f'), ('date', 'Tue, 24 Feb 2015 07:23:25 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3407_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3407_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3407_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '18733ccbf9141777d73f2c1155660b5a'), ('date', 'Tue, 24 Feb 2015 07:23:27 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3407.laz [size:15718922 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3407.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3407.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'ebd391341268d38acd3033384e233746'), ('date', 'Tue, 24 Feb 2015 07:23:29 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3408.laz [size:12056168 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3408.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3408.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '40b6064eb3515d73206ade7727655875'), ('date', 'Tue, 24 Feb 2015 07:23:30 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3408_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3408_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3408_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'd72e619bd52dbc97bc01b32b053fab8b'), ('date', 'Tue, 24 Feb 2015 07:23:31 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3408_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3408_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3408_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '028ac37ace21bdf72549e825acbaaa2d'), ('date', 'Tue, 24 Feb 2015 07:23:31 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3401_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3401_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3401_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'e2b3aa5a42272e926bbb10cddd9e720d'), ('date', 'Tue, 24 Feb 2015 07:23:33 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3401.laz [size:7040850 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3401.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3401.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'd8cf227f9ad31f29d82e6dcfd9da4e0b'), ('date', 'Tue, 24 Feb 2015 07:23:33 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3401_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3401_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3401_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'e95cfa46145aec3f6b93c7a64d592e64'), ('date', 'Tue, 24 Feb 2015 07:23:34 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3404_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3404_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3404_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '232446e4e94ceb2e798bfd6df89f93ee'), ('date', 'Tue, 24 Feb 2015 07:23:36 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3404.laz [size:9231953 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3404.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3404.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'f1bf6ae5e8c2cdbffb3ba63654a954a8'), ('date', 'Tue, 24 Feb 2015 07:23:37 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3404_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3404_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3404_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a14ae60a6ca4aef15b78ed541071760dbfad0af03b66631fbfa5abca79cf9875d4b30ea8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'afdc2f4d030cd61f4ddc89e845885ded'), ('date', 'Tue, 24 Feb 2015 07:23:38 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3309_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"GET /auth HTTP/1.1" 204 0
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/auth -X GET
+DEBUG:swiftclient:RESP STATUS: 204 No Content
+DEBUG:swiftclient:RESP HEADERS: [('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('x-storage-token', 'AUTH_rgwtk0d00000067656f6e6f64653a7377696674a89f5a8e1c1b3f2fd191ed54d8370338d89239e747a537464a7c17f787226169e0f61f94'), ('date', 'Tue, 24 Feb 2015 09:11:45 GMT'), ('x-storage-url', 'https://cephclient.lan.dream.upd.edu.ph/swift/v1'), ('x-auth-token', 'AUTH_rgwtk0d00000067656f6e6f64653a7377696674a89f5a8e1c1b3f2fd191ed54d8370338d89239e747a537464a7c17f787226169e0f61f94'), ('content-type', 'application/json')]
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a89f5a8e1c1b3f2fd191ed54d8370338d89239e747a537464a7c17f787226169e0f61f94"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'a5cb746f32a723f11fbc4ec5e3760e29'), ('date', 'Tue, 24 Feb 2015 09:11:45 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3309.laz [size:5193859 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a89f5a8e1c1b3f2fd191ed54d8370338d89239e747a537464a7c17f787226169e0f61f94"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '6a1d20793bb93571d11fe5a7cbd16721'), ('date', 'Tue, 24 Feb 2015 09:11:46 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3309_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a89f5a8e1c1b3f2fd191ed54d8370338d89239e747a537464a7c17f787226169e0f61f94"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '8bd16b709042cf5db954ac8f58f0b1f1'), ('date', 'Tue, 24 Feb 2015 09:11:47 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3308_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a89f5a8e1c1b3f2fd191ed54d8370338d89239e747a537464a7c17f787226169e0f61f94"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '269c1fc40a3913b79dd7a24d07bac745'), ('date', 'Tue, 24 Feb 2015 09:11:48 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3308_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a89f5a8e1c1b3f2fd191ed54d8370338d89239e747a537464a7c17f787226169e0f61f94"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '35e17764077d794b9dc456bdf264e86d'), ('date', 'Tue, 24 Feb 2015 09:11:48 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3308.laz [size:3979100 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674a89f5a8e1c1b3f2fd191ed54d8370338d89239e747a537464a7c17f787226169e0f61f94"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'f63cbafed8aa51b93d6d662fb5e674a7'), ('date', 'Tue, 24 Feb 2015 09:11:50 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3309_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"GET /auth HTTP/1.1" 204 0
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/auth -X GET
+DEBUG:swiftclient:RESP STATUS: 204 No Content
+DEBUG:swiftclient:RESP HEADERS: [('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('x-storage-token', 'AUTH_rgwtk0d00000067656f6e6f64653a73776966743ab8906159e049276f92ed54e012a332490a60829ba688366f36d274cbea9404796e29a8'), ('date', 'Tue, 24 Feb 2015 09:14:23 GMT'), ('x-storage-url', 'https://cephclient.lan.dream.upd.edu.ph/swift/v1'), ('x-auth-token', 'AUTH_rgwtk0d00000067656f6e6f64653a73776966743ab8906159e049276f92ed54e012a332490a60829ba688366f36d274cbea9404796e29a8'), ('content-type', 'application/json')]
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a73776966743ab8906159e049276f92ed54e012a332490a60829ba688366f36d274cbea9404796e29a8"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'a5cb746f32a723f11fbc4ec5e3760e29'), ('date', 'Tue, 24 Feb 2015 09:14:23 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"GET /swift/v1/geo-container/JE3309_dem.tif HTTP/1.1" 200 5769980
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309_dem.tif -X GET -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a73776966743ab8906159e049276f92ed54e012a332490a60829ba688366f36d274cbea9404796e29a8"
+DEBUG:swiftclient:RESP STATUS: 200 OK
+DEBUG:swiftclient:RESP HEADERS: [('content-length', '5769980'), ('accept-ranges', 'bytes'), ('server', 'Apache/2.2.22 (Fedora)'), ('last-modified', 'Tue, 24 Feb 2015 09:14:24 GMT'), ('connection', 'close'), ('etag', 'a5cb746f32a723f11fbc4ec5e3760e29'), ('date', 'Tue, 24 Feb 2015 09:14:24 GMT'), ('content-type', 'image/tiff')]
+INFO:client.py:Uploading  file JE3309_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"GET /auth HTTP/1.1" 204 0
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/auth -X GET
+DEBUG:swiftclient:RESP STATUS: 204 No Content
+DEBUG:swiftclient:RESP HEADERS: [('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('x-storage-token', 'AUTH_rgwtk0d00000067656f6e6f64653a737769667410590cd961898f00da92ed540884030c73182c1c3c220d7cd0a128dc2249c01bf6eb4404'), ('date', 'Tue, 24 Feb 2015 09:16:10 GMT'), ('x-storage-url', 'https://cephclient.lan.dream.upd.edu.ph/swift/v1'), ('x-auth-token', 'AUTH_rgwtk0d00000067656f6e6f64653a737769667410590cd961898f00da92ed540884030c73182c1c3c220d7cd0a128dc2249c01bf6eb4404'), ('content-type', 'application/json')]
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667410590cd961898f00da92ed540884030c73182c1c3c220d7cd0a128dc2249c01bf6eb4404"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'a5cb746f32a723f11fbc4ec5e3760e29'), ('date', 'Tue, 24 Feb 2015 09:16:10 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3309.laz [size:5193859 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667410590cd961898f00da92ed540884030c73182c1c3c220d7cd0a128dc2249c01bf6eb4404"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '6a1d20793bb93571d11fe5a7cbd16721'), ('date', 'Tue, 24 Feb 2015 09:16:10 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3309_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667410590cd961898f00da92ed540884030c73182c1c3c220d7cd0a128dc2249c01bf6eb4404"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '8bd16b709042cf5db954ac8f58f0b1f1'), ('date', 'Tue, 24 Feb 2015 09:16:11 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3308_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667410590cd961898f00da92ed540884030c73182c1c3c220d7cd0a128dc2249c01bf6eb4404"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '269c1fc40a3913b79dd7a24d07bac745'), ('date', 'Tue, 24 Feb 2015 09:16:12 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3308_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667410590cd961898f00da92ed540884030c73182c1c3c220d7cd0a128dc2249c01bf6eb4404"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '35e17764077d794b9dc456bdf264e86d'), ('date', 'Tue, 24 Feb 2015 09:16:12 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3308.laz [size:3979100 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667410590cd961898f00da92ed540884030c73182c1c3c220d7cd0a128dc2249c01bf6eb4404"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'f63cbafed8aa51b93d6d662fb5e674a7'), ('date', 'Tue, 24 Feb 2015 09:16:14 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3309_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"GET /auth HTTP/1.1" 204 0
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/auth -X GET
+DEBUG:swiftclient:RESP STATUS: 204 No Content
+DEBUG:swiftclient:RESP HEADERS: [('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('x-storage-token', 'AUTH_rgwtk0d00000067656f6e6f64653a737769667431be9285bdd954b6fa92ed54e01dc31b8a18a0327b2818f294d72bec3766f1428ad60c7b'), ('date', 'Tue, 24 Feb 2015 09:16:42 GMT'), ('x-storage-url', 'https://cephclient.lan.dream.upd.edu.ph/swift/v1'), ('x-auth-token', 'AUTH_rgwtk0d00000067656f6e6f64653a737769667431be9285bdd954b6fa92ed54e01dc31b8a18a0327b2818f294d72bec3766f1428ad60c7b'), ('content-type', 'application/json')]
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667431be9285bdd954b6fa92ed54e01dc31b8a18a0327b2818f294d72bec3766f1428ad60c7b"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'a5cb746f32a723f11fbc4ec5e3760e29'), ('date', 'Tue, 24 Feb 2015 09:16:42 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"HEAD /swift/v1/geo-container/JE3309_dem.tif HTTP/1.1" 200 0
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309_dem.tif -I -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667431be9285bdd954b6fa92ed54e01dc31b8a18a0327b2818f294d72bec3766f1428ad60c7b"
+DEBUG:swiftclient:RESP STATUS: 200 OK
+DEBUG:swiftclient:RESP HEADERS: [('content-length', '5769980'), ('accept-ranges', 'bytes'), ('server', 'Apache/2.2.22 (Fedora)'), ('last-modified', 'Tue, 24 Feb 2015 09:16:42 GMT'), ('connection', 'close'), ('etag', 'a5cb746f32a723f11fbc4ec5e3760e29'), ('date', 'Tue, 24 Feb 2015 09:16:43 GMT'), ('content-type', 'image/tiff')]
+INFO:client.py:Uploading  file JE3309.laz [size:5193859 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667431be9285bdd954b6fa92ed54e01dc31b8a18a0327b2818f294d72bec3766f1428ad60c7b"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '6a1d20793bb93571d11fe5a7cbd16721'), ('date', 'Tue, 24 Feb 2015 09:16:43 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"HEAD /swift/v1/geo-container/JE3309.laz HTTP/1.1" 200 0
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309.laz -I -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667431be9285bdd954b6fa92ed54e01dc31b8a18a0327b2818f294d72bec3766f1428ad60c7b"
+DEBUG:swiftclient:RESP STATUS: 200 OK
+DEBUG:swiftclient:RESP HEADERS: [('content-length', '5193859'), ('accept-ranges', 'bytes'), ('server', 'Apache/2.2.22 (Fedora)'), ('last-modified', 'Tue, 24 Feb 2015 09:16:43 GMT'), ('connection', 'close'), ('etag', '6a1d20793bb93571d11fe5a7cbd16721'), ('date', 'Tue, 24 Feb 2015 09:16:43 GMT')]
+INFO:client.py:Uploading  file JE3309_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667431be9285bdd954b6fa92ed54e01dc31b8a18a0327b2818f294d72bec3766f1428ad60c7b"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '8bd16b709042cf5db954ac8f58f0b1f1'), ('date', 'Tue, 24 Feb 2015 09:16:43 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"HEAD /swift/v1/geo-container/JE3309_ortho.tif HTTP/1.1" 200 0
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309_ortho.tif -I -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667431be9285bdd954b6fa92ed54e01dc31b8a18a0327b2818f294d72bec3766f1428ad60c7b"
+DEBUG:swiftclient:RESP STATUS: 200 OK
+DEBUG:swiftclient:RESP HEADERS: [('content-length', '17299767'), ('accept-ranges', 'bytes'), ('server', 'Apache/2.2.22 (Fedora)'), ('last-modified', 'Tue, 24 Feb 2015 09:16:44 GMT'), ('connection', 'close'), ('etag', '8bd16b709042cf5db954ac8f58f0b1f1'), ('date', 'Tue, 24 Feb 2015 09:16:44 GMT'), ('content-type', 'image/tiff')]
+INFO:client.py:Uploading  file JE3308_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667431be9285bdd954b6fa92ed54e01dc31b8a18a0327b2818f294d72bec3766f1428ad60c7b"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '269c1fc40a3913b79dd7a24d07bac745'), ('date', 'Tue, 24 Feb 2015 09:16:44 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"HEAD /swift/v1/geo-container/JE3308_dem.tif HTTP/1.1" 200 0
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308_dem.tif -I -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667431be9285bdd954b6fa92ed54e01dc31b8a18a0327b2818f294d72bec3766f1428ad60c7b"
+DEBUG:swiftclient:RESP STATUS: 200 OK
+DEBUG:swiftclient:RESP HEADERS: [('content-length', '5769980'), ('accept-ranges', 'bytes'), ('server', 'Apache/2.2.22 (Fedora)'), ('last-modified', 'Tue, 24 Feb 2015 09:16:45 GMT'), ('connection', 'close'), ('etag', '269c1fc40a3913b79dd7a24d07bac745'), ('date', 'Tue, 24 Feb 2015 09:16:45 GMT'), ('content-type', 'image/tiff')]
+INFO:client.py:Uploading  file JE3308_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667431be9285bdd954b6fa92ed54e01dc31b8a18a0327b2818f294d72bec3766f1428ad60c7b"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '35e17764077d794b9dc456bdf264e86d'), ('date', 'Tue, 24 Feb 2015 09:16:45 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"HEAD /swift/v1/geo-container/JE3308_ortho.tif HTTP/1.1" 200 0
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308_ortho.tif -I -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667431be9285bdd954b6fa92ed54e01dc31b8a18a0327b2818f294d72bec3766f1428ad60c7b"
+DEBUG:swiftclient:RESP STATUS: 200 OK
+DEBUG:swiftclient:RESP HEADERS: [('content-length', '17299767'), ('accept-ranges', 'bytes'), ('server', 'Apache/2.2.22 (Fedora)'), ('last-modified', 'Tue, 24 Feb 2015 09:16:47 GMT'), ('connection', 'close'), ('etag', '35e17764077d794b9dc456bdf264e86d'), ('date', 'Tue, 24 Feb 2015 09:16:47 GMT'), ('content-type', 'image/tiff')]
+INFO:client.py:Uploading  file JE3308.laz [size:3979100 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667431be9285bdd954b6fa92ed54e01dc31b8a18a0327b2818f294d72bec3766f1428ad60c7b"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'f63cbafed8aa51b93d6d662fb5e674a7'), ('date', 'Tue, 24 Feb 2015 09:16:47 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"HEAD /swift/v1/geo-container/JE3308.laz HTTP/1.1" 200 0
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308.laz -I -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667431be9285bdd954b6fa92ed54e01dc31b8a18a0327b2818f294d72bec3766f1428ad60c7b"
+DEBUG:swiftclient:RESP STATUS: 200 OK
+DEBUG:swiftclient:RESP HEADERS: [('content-length', '3979100'), ('accept-ranges', 'bytes'), ('server', 'Apache/2.2.22 (Fedora)'), ('last-modified', 'Tue, 24 Feb 2015 09:16:47 GMT'), ('connection', 'close'), ('etag', 'f63cbafed8aa51b93d6d662fb5e674a7'), ('date', 'Tue, 24 Feb 2015 09:16:47 GMT')]
+INFO:client.py:Uploading  file JE3309_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"GET /auth HTTP/1.1" 204 0
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/auth -X GET
+DEBUG:swiftclient:RESP STATUS: 204 No Content
+DEBUG:swiftclient:RESP HEADERS: [('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('x-storage-token', 'AUTH_rgwtk0d00000067656f6e6f64653a737769667492300017c77489f35797ed5408478c2456df8b3509a526cc17052876657a41ad2bdd9a0e'), ('date', 'Tue, 24 Feb 2015 09:35:19 GMT'), ('x-storage-url', 'https://cephclient.lan.dream.upd.edu.ph/swift/v1'), ('x-auth-token', 'AUTH_rgwtk0d00000067656f6e6f64653a737769667492300017c77489f35797ed5408478c2456df8b3509a526cc17052876657a41ad2bdd9a0e'), ('content-type', 'application/json')]
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667492300017c77489f35797ed5408478c2456df8b3509a526cc17052876657a41ad2bdd9a0e"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'a5cb746f32a723f11fbc4ec5e3760e29'), ('date', 'Tue, 24 Feb 2015 09:35:19 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3309.laz [size:5193859 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667492300017c77489f35797ed5408478c2456df8b3509a526cc17052876657a41ad2bdd9a0e"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '6a1d20793bb93571d11fe5a7cbd16721'), ('date', 'Tue, 24 Feb 2015 09:35:20 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3309_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667492300017c77489f35797ed5408478c2456df8b3509a526cc17052876657a41ad2bdd9a0e"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '8bd16b709042cf5db954ac8f58f0b1f1'), ('date', 'Tue, 24 Feb 2015 09:35:21 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3308_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667492300017c77489f35797ed5408478c2456df8b3509a526cc17052876657a41ad2bdd9a0e"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '269c1fc40a3913b79dd7a24d07bac745'), ('date', 'Tue, 24 Feb 2015 09:35:23 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3308_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667492300017c77489f35797ed5408478c2456df8b3509a526cc17052876657a41ad2bdd9a0e"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '35e17764077d794b9dc456bdf264e86d'), ('date', 'Tue, 24 Feb 2015 09:35:24 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3308.laz [size:3979100 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a737769667492300017c77489f35797ed5408478c2456df8b3509a526cc17052876657a41ad2bdd9a0e"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'f63cbafed8aa51b93d6d662fb5e674a7'), ('date', 'Tue, 24 Feb 2015 09:35:25 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3309_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"GET /auth HTTP/1.1" 204 0
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/auth -X GET
+DEBUG:swiftclient:RESP STATUS: 204 No Content
+DEBUG:swiftclient:RESP HEADERS: [('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('x-storage-token', 'AUTH_rgwtk0d00000067656f6e6f64653a7377696674dd3af4985546c21e9797ed5428f9b7210fccef99b6650aad163982edaf1ffd6d2e6ef36c'), ('date', 'Tue, 24 Feb 2015 09:36:23 GMT'), ('x-storage-url', 'https://cephclient.lan.dream.upd.edu.ph/swift/v1'), ('x-auth-token', 'AUTH_rgwtk0d00000067656f6e6f64653a7377696674dd3af4985546c21e9797ed5428f9b7210fccef99b6650aad163982edaf1ffd6d2e6ef36c'), ('content-type', 'application/json')]
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674dd3af4985546c21e9797ed5428f9b7210fccef99b6650aad163982edaf1ffd6d2e6ef36c"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'a5cb746f32a723f11fbc4ec5e3760e29'), ('date', 'Tue, 24 Feb 2015 09:36:23 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3309.laz [size:5193859 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674dd3af4985546c21e9797ed5428f9b7210fccef99b6650aad163982edaf1ffd6d2e6ef36c"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '6a1d20793bb93571d11fe5a7cbd16721'), ('date', 'Tue, 24 Feb 2015 09:36:24 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3309_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674dd3af4985546c21e9797ed5428f9b7210fccef99b6650aad163982edaf1ffd6d2e6ef36c"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '8bd16b709042cf5db954ac8f58f0b1f1'), ('date', 'Tue, 24 Feb 2015 09:36:24 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3308_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674dd3af4985546c21e9797ed5428f9b7210fccef99b6650aad163982edaf1ffd6d2e6ef36c"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '269c1fc40a3913b79dd7a24d07bac745'), ('date', 'Tue, 24 Feb 2015 09:36:26 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3308_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674dd3af4985546c21e9797ed5428f9b7210fccef99b6650aad163982edaf1ffd6d2e6ef36c"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '35e17764077d794b9dc456bdf264e86d'), ('date', 'Tue, 24 Feb 2015 09:36:27 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3308.laz [size:3979100 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a7377696674dd3af4985546c21e9797ed5428f9b7210fccef99b6650aad163982edaf1ffd6d2e6ef36c"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'f63cbafed8aa51b93d6d662fb5e674a7'), ('date', 'Tue, 24 Feb 2015 09:36:28 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3309_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"GET /auth HTTP/1.1" 204 0
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/auth -X GET
+DEBUG:swiftclient:RESP STATUS: 204 No Content
+DEBUG:swiftclient:RESP HEADERS: [('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('x-storage-token', 'AUTH_rgwtk0d00000067656f6e6f64653a73776966741eb8fcc3bc6de8d5f297ed543858860ce450fd77684fe5525e23aee66f7a8acf25ca153e'), ('date', 'Tue, 24 Feb 2015 09:37:54 GMT'), ('x-storage-url', 'https://cephclient.lan.dream.upd.edu.ph/swift/v1'), ('x-auth-token', 'AUTH_rgwtk0d00000067656f6e6f64653a73776966741eb8fcc3bc6de8d5f297ed543858860ce450fd77684fe5525e23aee66f7a8acf25ca153e'), ('content-type', 'application/json')]
+INFO:requests.packages.urllib3.connectionpool:Starting new HTTPS connection (1): cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a73776966741eb8fcc3bc6de8d5f297ed543858860ce450fd77684fe5525e23aee66f7a8acf25ca153e"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'a5cb746f32a723f11fbc4ec5e3760e29'), ('date', 'Tue, 24 Feb 2015 09:37:54 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3309.laz [size:5193859 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a73776966741eb8fcc3bc6de8d5f297ed543858860ce450fd77684fe5525e23aee66f7a8acf25ca153e"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '6a1d20793bb93571d11fe5a7cbd16721'), ('date', 'Tue, 24 Feb 2015 09:37:54 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3309_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3309_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3309_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a73776966741eb8fcc3bc6de8d5f297ed543858860ce450fd77684fe5525e23aee66f7a8acf25ca153e"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '8bd16b709042cf5db954ac8f58f0b1f1'), ('date', 'Tue, 24 Feb 2015 09:37:55 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3308_dem.tif [size:5769980 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308_dem.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308_dem.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a73776966741eb8fcc3bc6de8d5f297ed543858860ce450fd77684fe5525e23aee66f7a8acf25ca153e"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '269c1fc40a3913b79dd7a24d07bac745'), ('date', 'Tue, 24 Feb 2015 09:37:56 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3308_ortho.tif [size:17299767 | type:image/tiff]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308_ortho.tif HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308_ortho.tif -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a73776966741eb8fcc3bc6de8d5f297ed543858860ce450fd77684fe5525e23aee66f7a8acf25ca153e"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', '35e17764077d794b9dc456bdf264e86d'), ('date', 'Tue, 24 Feb 2015 09:37:57 GMT'), ('content-type', 'text/plain; charset=utf-8')]
+INFO:client.py:Uploading  file JE3308.laz [size:3979100 | type:None]...
+INFO:requests.packages.urllib3.connectionpool:Resetting dropped connection: cephclient.lan.dream.upd.edu.ph
+DEBUG:requests.packages.urllib3.connectionpool:"PUT /swift/v1/geo-container/JE3308.laz HTTP/1.1" 201 None
+DEBUG:swiftclient:REQ: curl -i https://cephclient.lan.dream.upd.edu.ph/swift/v1/geo-container/JE3308.laz -X PUT -H "X-Auth-Token: AUTH_rgwtk0d00000067656f6e6f64653a73776966741eb8fcc3bc6de8d5f297ed543858860ce450fd77684fe5525e23aee66f7a8acf25ca153e"
+DEBUG:swiftclient:RESP STATUS: 201 Created
+DEBUG:swiftclient:RESP HEADERS: [('transfer-encoding', 'chunked'), ('server', 'Apache/2.2.22 (Fedora)'), ('connection', 'close'), ('etag', 'f63cbafed8aa51b93d6d662fb5e674a7'), ('date', 'Tue, 24 Feb 2015 09:37:59 GMT'), ('content-type', 'text/plain; charset=utf-8')]
