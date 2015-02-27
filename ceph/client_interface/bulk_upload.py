@@ -7,9 +7,17 @@ from pprint import pprint
 from os import listdir
 from os.path import isfile, join
 
-ceph_user = 'geonode:swift'
-ceph_key = ***REMOVED***
-ceph_ogw_url = 'https://cephclient.lan.dream.upd.edu.ph'
+CEPH_OGW = {
+    'default' : {
+        'USER' : 'geonode:swift',
+        'KEY' : ***REMOVED***,
+        'LOCATION' : 'https://cephclient.lan.dream.upd.edu.ph',
+        'CONTAINER' : 'geo-container',
+    }
+}
+#~ ceph_user = 'geonode:swift'
+#~ ceph_key = ***REMOVED***
+#~ ceph_ogw_url = 'https://cephclient.lan.dream.upd.edu.ph'
 
 original_filters = warnings.filters[:]
 
@@ -22,7 +30,7 @@ warnings.simplefilter("ignore")
 
 uploaded_objects_queue = []
 queue_condition = Condition()
-ceph_client = CephStorageClient(ceph_user, ceph_key, ceph_ogw_url, container_name='geo-container')
+ceph_client = CephStorageClient(CEPH_OGW['default']['USER'], CEPH_OGW['default']['KEY'], CEPH_OGW['default']['URL'], container_name=CEPH_OGW['default']['CONTAINER'])
 grid_files_dir = "/home/geonode/grid_data"
 
 prod = CephObjectProducer(ceph_client, grid_files_dir, queue_condition, uploaded_objects_queue)

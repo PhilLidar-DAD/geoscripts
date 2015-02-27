@@ -20,6 +20,17 @@ from geonode.settings import OGC_SERVER
 from geonode.cephgeo.models import CephDataObject, LayerToCephObjectMap
 from geonode.layers.models import Layer
 
+WFS_SETTINGS = {
+    'VERSION' : '1.0.0',
+    'URL' : OGC_SERVER['default']['LOCATION'] + 'wfs',
+    'FORMAT_OPTIONS' : 'charset:UTF-8',
+    'GEONODE_NS' : 'geonode:',
+    
+    'METHOD' : 'GET',
+    'SERVICE' : 'WFS',
+    'REQUEST' : 'GetFeature',
+}
+
 def create_mapping(obj_meta_dict):
     """
         size_in_bytes   = models.IntegerField()
@@ -74,22 +85,22 @@ def create_mapping(obj_meta_dict):
 
 def get_grid_refs(shapefile_name):
     #Retrieve Shapefile Layer ID and GRID_REFs list from WFS to Geoserver
-    wfs_version="1.0.0"
-    username="admin"
-    password="geoserver"
-    method="Get"
-    base_url=OGC_SERVER['default']['PUBLIC_LOCATION'] + "wfs"
-    layer_name=shapefile_name
-    request = { "version"       : wfs_version, 
+    #~ wfs_version="1.0.0"
+    #~ username="admin"
+    #~ password="geoserver"
+    #~ method="Get"
+    #~ base_url=OGC_SERVER['default']['PUBLIC_LOCATION'] + "wfs"
+    #~ layer_name=shapefile_name
+    request = { "version"       : WFS_SETTINGS['VERSION'], 
                 "request"       : "GetFeature",
                 "format_options": "charset:UTF-8",
                 "service"       : "WFS",
-                "typename"      : layer_name,
+                "typename"      : shapefile_name,
                 }
 
     data = urlencode(request)
-    print("WFS URL: {0} / {1}".format(base_url,data))
-    u = openURL(base_url, data, method, username = username, password = password)
+    print("WFS URL: {0} / {1}".format(WFS_SETTINGS['URL'],data))
+    u = openURL(WFS_SETTINGS['URL'], data, 'Get', username = OGC_SERVER['default']['USER'], password = OGC_SERVER['default']['PASSWORD'])
 
     #Create lxml tree and namespace map
     wfs_xml = u.read()
@@ -100,6 +111,6 @@ def get_grid_refs(shapefile_name):
     pprint(wfs_nsmap)
 
     #Get a list of gridrefs using xpath
-    return list(wfs_etree.xpath("//geonode:GRID_REF/text()",
+    return list(wfs_etree.xpath("//{0}GRID_REF/text()".format(WFS_SETTINGS['GEONODE_NS']),
                                 namespaces=wfs_nsmap))
     
