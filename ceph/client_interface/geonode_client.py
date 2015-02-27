@@ -14,6 +14,7 @@ from owslib.etree import etree
 sys.path.append("/home/geonode/geonode-debian-2.4.0-beta22")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "geonode.settings")
 from django.core.management import execute_from_command_line
+from geonode.settings import OGC_SERVER
 #execute_from_command_line(sys.argv)
 
 from geonode.cephgeo.models import CephDataObject, LayerToCephObjectMap
@@ -47,12 +48,16 @@ def create_mapping(obj_meta_dict):
     
     print("Identifying shapefile to map to..."   )
     for shapefile in list_of_shapefiles:
+        print("Getting shapefile of name '{0}'".format(shapefile))
         grid_refs_per_shapefile[shapefile] = get_grid_refs(shapefile)
-        print("Shapefile [{0}] has [{1}] GRID_REFs.".format(shapefile, len(grid_refs_per_shapefile[shapefile]))
+        print("Shapefile [{0}] has [{1}] GRID_REFs.".format(shapefile, len(grid_refs_per_shapefile[shapefile])))
     
+    print("Checking Shapefile-GridRef dictionary:")
+    pprint(grid_refs_per_shapefile)
+
     #Identify which Shapefile Layer the tile's GRID_REF is included
     target_shapefile = None
-    for shapefile, grid_refs in grid_refs_per_shapefile:
+    for shapefile, grid_refs in grid_refs_per_shapefile.iteritems():
         if grid_ref in grid_refs:
             target_shapefile = shapefile
     
@@ -61,7 +66,7 @@ def create_mapping(obj_meta_dict):
         raise Exception("No matching shapefile for GRID_REF {0}".format(grid_ref))
     else:
         print("Tiled object of GRID_REF [{0}] belongs to Shapefile [{1}]".format(grid_ref, target_shapefile))
-        target_layer=Layers.objects.get(name=target_shapefile)
+        target_layer=Layer.objects.get(typename=target_shapefile)
         
     #Create LayerToCephObjectMap instance using Layer and CephDataObject instances
     layer_to_ceph_map = LayerToCephObjectMap(shapefile=target_layer, ceph_data_obj=ceph_obj)
@@ -73,8 +78,8 @@ def get_grid_refs(shapefile_name):
     username="admin"
     password="geoserver"
     method="Get"
-    base_url="http://192.168.56.52:8080/geoserver/wfs"
-    layer_name="geonode:"+shapefile_name
+    base_url=OGC_SERVER['default']['PUBLIC_LOCATION'] + "wfs"
+    layer_name=shapefile_name
     request = { "version"       : wfs_version, 
                 "request"       : "GetFeature",
                 "format_options": "charset:UTF-8",
@@ -83,6 +88,7 @@ def get_grid_refs(shapefile_name):
                 }
 
     data = urlencode(request)
+    print("WFS URL: {0} / {1}".format(base_url,data))
     u = openURL(base_url, data, method, username = username, password = password)
 
     #Create lxml tree and namespace map
@@ -90,6 +96,8 @@ def get_grid_refs(shapefile_name):
     wfs_etree = etree.fromstring(wfs_xml)
     wfs_nsmap = wfs_etree.nsmap
     wfs_nsmap.pop(None,None)
+    print("WFS Namespace Map:")
+    pprint(wfs_nsmap)
 
     #Get a list of gridrefs using xpath
     return list(wfs_etree.xpath("//geonode:GRID_REF/text()",
