@@ -11,7 +11,7 @@ CEPH_OGW = {
     'default' : {
         'USER' : 'geonode:swift',
         'KEY' : ***REMOVED***,
-        'LOCATION' : 'https://cephclient.lan.dream.upd.edu.ph',
+        'URL' : 'https://cephclient.lan.dream.upd.edu.ph',
         'CONTAINER' : 'geo-container',
     }
 }
