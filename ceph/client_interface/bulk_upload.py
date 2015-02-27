@@ -1,3 +1,6 @@
+activate_this_file = "/home/geonode/.virtualenvs/geonode-deb/bin/activate_this.py"
+execfile(activate_this_file, dict(__file__=activate_this_file))
+
 from threading import Thread, Condition
 from threaded_classes import CephObjectProducer, GeonodeMapperConsumer
 from ceph_client import CephStorageClient
@@ -6,6 +9,7 @@ import swiftclient, warnings, os, mimetypes, logging
 from pprint import pprint
 from os import listdir
 from os.path import isfile, join
+
 
 CEPH_OGW = {
     'default' : {
