@@ -7,7 +7,7 @@ import os
 import osgeotools
 import sys
 
-_version = "0.1.53"
+_version = "0.1.54"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
 _LOG_LEVEL = logging.DEBUG
@@ -120,7 +120,6 @@ if __name__ == '__main__':
         for tile_x in xrange(tile_extents["min_x"],
                              tile_extents["max_x"],
                              _TILE_SIZE):
-            # _logger.debug("tile_x = %s tile_y = %s", tile_x, tile_y)
 
             # Get tile of band array
             tile = osgeotools.get_band_array_tile(resampled_dem, raster_band,
