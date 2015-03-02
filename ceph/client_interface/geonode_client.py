@@ -107,8 +107,7 @@ def get_grid_refs(shapefile_name):
     wfs_etree = etree.fromstring(wfs_xml)
     wfs_nsmap = wfs_etree.nsmap
     wfs_nsmap.pop(None,None)
-    pprint(wfs_nsmap)
-
+    
     #Get a list of gridrefs using xpath
     return list(wfs_etree.xpath("//{0}GRID_REF/text()".format(WFS_SETTINGS['GEONODE_NS']),
                                 namespaces=wfs_nsmap))
