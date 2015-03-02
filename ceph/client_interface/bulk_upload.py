@@ -11,17 +11,17 @@ activate_this_file = "/home/geonode/.virtualenvs/geonode-deb/bin/activate_this.p
 parser = argparse.ArgumentParser()
 parser.add_argument("dir", 
                     help="Directory containing the tiled files and named according to their grid reference")
-parser.add_argument("-e", "--virtualenv",dest="venv" action="store_true",
+parser.add_argument("-e", "--virtualenv",dest="venv",
                     help="Path to the virtualenv activate_this.py file")
 args = parser.parse_args()
-
+pprint(args)
 #Check if --virtualenv is set
 if args.venv is not None:
     if isfile(args.venv):
         activate_this_file = args.venv
     else:
         raise Exception("ERROR: Failed to activate environment. Cannot find\n \
-                            virtualenv activate file in: [{0}]".format(activate_this_file))
+                            virtualenv activate file in: [{0}]".format(args.venv))
                     
 #Try activating the virtualenv, error out if it cannot be activated
 try:
