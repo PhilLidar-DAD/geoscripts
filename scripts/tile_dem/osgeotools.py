@@ -9,7 +9,7 @@ try:
 except:
     sys.exit('ERROR: cannot find GDAL/OGR modules')
 
-_version = "0.1.52"
+_version = "0.1.53"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
 
@@ -27,21 +27,6 @@ def world2pixel(gt, x, y):
     pixel_loc = gdal.ApplyGeoTransform(inv_gt, x, y)
     col_id, row_id = tuple([int(round(i, 0)) for i in pixel_loc])
     return col_id, row_id
-
-
-def world2pixelB(gt, x, y, cols, rows):
-    col_id, row_id = world2pixel(gt, x, y)
-    # Bound pixel locations
-    if col_id < 0:
-        col_id = 0
-    elif col_id > cols:
-        col_id = cols
-    if row_id < 0:
-        row_id = 0
-    elif row_id > rows:
-        row_id = rows
-    return col_id, row_id
-
 
 def _image2array(i):
     a = gdalnumeric.fromstring(i.tostring(), 'b')

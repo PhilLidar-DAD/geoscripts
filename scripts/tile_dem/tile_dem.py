@@ -7,7 +7,7 @@ import os
 import osgeotools
 import sys
 
-_version = "0.1.54"
+_version = "0.1.55"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
 _LOG_LEVEL = logging.DEBUG
@@ -62,10 +62,6 @@ def _floor(x):
 def _ceil(x):
     return int(math.ceil(x / float(_TILE_SIZE)) * _TILE_SIZE)
 
-
-def _has_decimal(x):
-    return math.floor(x) != math.ceil(x)
-
 if __name__ == '__main__':
 
     # Parse arguments
@@ -96,7 +92,7 @@ if __name__ == '__main__':
     # Open resampled DEM
     resampled_dem = osgeotools.open_raster(resampled_dem_path, args.prj_file)
     _logger.info("Resampled DEM geotransform:\n%s",
-        resampled_dem["geotransform"])
+                 resampled_dem["geotransform"])
     _logger.info("Resampled DEM extents:\n%s", resampled_dem["extents"])
 
     # Compare rasters
