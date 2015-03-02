@@ -63,9 +63,9 @@ def create_mapping(obj_meta_dict):
         grid_refs_per_shapefile[shapefile] = get_grid_refs(shapefile)
         print("Shapefile [{0}] has [{1}] GRID_REFs.".format(shapefile, len(grid_refs_per_shapefile[shapefile])))
     
-    print("Checking Shapefile-GridRef dictionary:")
-    pprint(grid_refs_per_shapefile)
-
+    #print("Checking Shapefile-GridRef dictionary:")
+    #pprint(grid_refs_per_shapefile)
+    
     #Identify which Shapefile Layer the tile's GRID_REF is included
     target_shapefile = None
     for shapefile, grid_refs in grid_refs_per_shapefile.iteritems():
