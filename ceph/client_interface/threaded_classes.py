@@ -31,13 +31,7 @@ class CephObjectProducer(Thread):
                 grid_ref = path.rsplit("/")[-1]
                 file_path = join(path, name)
                 self.produce_object(file_path, grid_ref)
-                print("==============================")
-                print("New Objects in Uploaded Queue:")
-                print("==============================")
-                pprint(self.obj_queue)
-                print("==============================")
-        
-        
+                
         #Close Ceph Connection
         self.ceph_client.connect()
             
@@ -95,7 +89,12 @@ class GeonodeMapperConsumer(Thread):
         if not self.obj_queue:
                 print "INFO: Nothing in queue, waiting..."
                 self.condition.wait()
-                
+        
+        print("==============================")
+        print("New Objects in Uploaded Queue:")
+        print("==============================")
+        pprint(self.obj_queue)
+        print("==============================")        
         obj_dict = self.obj_queue.pop(0)
         
         #TODO:
