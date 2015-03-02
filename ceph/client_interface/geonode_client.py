@@ -99,7 +99,7 @@ def get_grid_refs(shapefile_name):
                 }
 
     data = urlencode(request)
-    print("WFS URL: {0} / {1}".format(WFS_SETTINGS['URL'],data))
+    print("WFS URL: {0}/{1}".format(WFS_SETTINGS['URL'],data))
     u = openURL(WFS_SETTINGS['URL'], data, 'Get', username = OGC_SERVER['default']['USER'], password = OGC_SERVER['default']['PASSWORD'])
 
     #Create lxml tree and namespace map
@@ -107,7 +107,6 @@ def get_grid_refs(shapefile_name):
     wfs_etree = etree.fromstring(wfs_xml)
     wfs_nsmap = wfs_etree.nsmap
     wfs_nsmap.pop(None,None)
-    print("WFS Namespace Map:")
     pprint(wfs_nsmap)
 
     #Get a list of gridrefs using xpath

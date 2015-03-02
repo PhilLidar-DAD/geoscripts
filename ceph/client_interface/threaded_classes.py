@@ -31,10 +31,11 @@ class CephObjectProducer(Thread):
                 grid_ref = path.rsplit("/")[-1]
                 file_path = join(path, name)
                 self.produce_object(file_path, grid_ref)
-                print("Uploaded Objects Queue:")
-                print("=======================")
+                print("==============================")
+                print("New Objects in Uploaded Queue:")
+                print("==============================")
                 pprint(self.obj_queue)
-                print("=======================")
+                print("==============================")
         
         
         #Close Ceph Connection
@@ -56,7 +57,6 @@ class CephObjectProducer(Thread):
             obj_dict = self.ceph_client.upload_file_from_path(filepath)
             obj_dict['grid_ref'] = grid_ref
             self.obj_queue.append(obj_dict)
-            print "Produced", obj_dict
             
             #Notify consumers waiting on condition
             self.condition.notify()
@@ -93,19 +93,14 @@ class GeonodeMapperConsumer(Thread):
         self.condition.acquire()
         
         if not self.obj_queue:
-                print "Nothing in queue, consumer is waiting"
+                print "INFO: Nothing in queue, waiting..."
                 self.condition.wait()
-                print "Producer added something to queue and notified the consumer"
-        
+                
         obj_dict = self.obj_queue.pop(0)
         
         #TODO:
         geoclient.create_mapping(obj_dict)
         
-        print "Consumed", obj_dict
-        print("Uploaded Objects Queue:")
-        print("=======================")
-        pprint(self.obj_queue)
-        print("=======================")
+        print "INFO: Mapped:", obj_dict
         self.condition.release()
 
