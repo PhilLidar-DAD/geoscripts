@@ -9,7 +9,7 @@ try:
 except:
     sys.exit('ERROR: cannot find GDAL/OGR modules')
 
-_version = "0.1.51"
+_version = "0.1.52"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
 
@@ -56,6 +56,7 @@ def isexists(path):
         _logger.error("%s path does not exist! Exiting.", path)
         exit(1)
     return normpath
+
 
 def _open_ogr_driver(driver_name):
     # Check if driver exists
@@ -161,34 +162,11 @@ def get_band_array_tile(raster, raster_band, xoff, yoff, size):
     _logger.debug("ul_c = %s ul_r = %s lr_c = %s lr_r = %s", ul_c, ul_r,
                   lr_c, lr_r)
 
-    # Compute actual coordinates of upper left pixel
-    # ul_x, ul_y = pixel2world(gt, ul_c, ul_r)
-    # _logger.debug("ul_x = %s ul_y = %s", ul_x, ul_y)
-
-    # Get mask dimensions
-    # tile_cols = int(lr_c - ul_c)
-    # tile_rows = int(lr_r - ul_r)
-    # _logger.debug("tile_cols = %s tile_rows = %s", tile_cols, tile_rows)
-
-    # Initialize tile
-    nodata = raster_band["nodata"]
-    # tile = numpy.zeros((size, size), dtype=numpy.float32)
-    # tile.fill(nodata)
-    # _logger.debug("initial tile =\n%s", tile)
-
-    # Get subset of raster band array (subset defined by tile bounding box)
-    # ul_rB = 0 if ul_r < 0 else ul_r
-    # ul_cB = 0 if ul_c < 0 else ul_c
+    # Get tile subset
     tile = raster_band["band_array"][ul_r:lr_r, ul_c:lr_c]
-    # for tile_r in xrange(0, size):
-    #     for tile_c in xrange(0, size):
-    #         band_c, band_r = ul_c + tile_c, ul_r + tile_r
-    #         if 0 <= band_c < raster["cols"] and 0 <= band_r < raster["rows"]:
-    #             tile[tile_r, tile_c] = raster_band[
-    #                 "band_array"][band_r, band_c]
-    # _logger.debug("tile =\n%s", tile)
 
     # Check if band subset has data
+    nodata = raster_band["nodata"]
     if nodata == tile.min() == tile.max():
         _logger.debug("Tile has no data! Skipping.")
         return None
@@ -331,7 +309,6 @@ def compare_rasters(src_raster, dst_raster):
         if cur_pct % 10 == 0 and cur_pct > last_pct:
             _logger.info("Progress: {0}%".format(cur_pct))
             last_pct = cur_pct
-        # exit(1)
     # Compute average and standard deviation
     avg = numpy.average(samples)
     std = numpy.std(samples)
