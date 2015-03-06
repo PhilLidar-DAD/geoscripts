@@ -33,7 +33,7 @@ class CephObjectProducer(Thread):
                 self.produce_object(file_path, grid_ref)
                 
         #Close Ceph Connection
-        self.ceph_client.connect()
+        self.ceph_client.close_connection()
             
             
     def produce_object(self, filepath, grid_ref):
