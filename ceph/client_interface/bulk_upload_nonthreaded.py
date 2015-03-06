@@ -1,8 +1,8 @@
 #!/usr/bin/python
 from pprint import pprint
-from os import listdir
+from os import listdir, walk
 from os.path import isfile, isdir, join
-import argparse
+import argparse, time
 
 #Default virtualenv path to activate file
 activate_this_file = "/home/geonode/.virtualenvs/geonode-deb/bin/activate_this.py"
@@ -86,5 +86,12 @@ for path, subdirs, files in walk(grid_files_dir):
 ceph_client.close_connection()
 
 #Write uploaded object details into a file
-data_dump_file_path = "dump/uploaded_objects_{0}".format(time.strftime("%Y-%m-%d-%H%M-%S"))
-pickle.dump(uploaded_objects, data_dump_file_path)
+data_dump_file_path = "dump/uploaded_objects_{0}.txt".format(time.strftime("%Y-%m-%d-%H%M-%S"))
+with open(data_dump_file_path, 'w') as f:
+    pickle.dump(uploaded_objects, f)
+
+print("====================")
+print("Done Uploading!")
+print("wrote data to file:")
+print("[{0}]".format(data_dump_file_path))
+print("====================")
