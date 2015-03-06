@@ -6,7 +6,9 @@ python bulk_upload.py [-e] <directory_containing_tiled_data>
 
 bulk_upload.py [-e] <directory_containing_tiled_data>
 
+To see uploaded files, visit:
 
+http://cephgeo.geonode.lan.dream.upd.edu.ph:8000/ceph/list
 
 NOTES: 
 * Wait until a message says "Nothing in queue, consumer is waiting", then
