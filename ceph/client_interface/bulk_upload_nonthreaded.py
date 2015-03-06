@@ -32,7 +32,7 @@ except IOError as e:
     raise e
 
 from ceph_client import CephStorageClient
-import swiftclient, warnings, mimetypes, logging, pickle
+import swiftclient, warnings, mimetypes, logging, cPickle
 
 #if __name__ == "__main__":
 
@@ -88,7 +88,7 @@ ceph_client.close_connection()
 #Write uploaded object details into a file
 data_dump_file_path = "dump/uploaded_objects_{0}.txt".format(time.strftime("%Y-%m-%d-%H%M-%S"))
 with open(data_dump_file_path, 'w') as f:
-    pickle.dump(uploaded_objects, f)
+    cPickle.dump(uploaded_objects,f)
 
 print("====================")
 print("Done Uploading!")
