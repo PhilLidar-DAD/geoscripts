@@ -1,4 +1,4 @@
-import swiftclient, warnings, os, mimetypes, logging
+import swiftclient, warnings, os, mimetypes, logging, time
 from pprint import pprint
 from os import listdir
 from os.path import isfile, join
@@ -82,6 +82,7 @@ class CephStorageClient(object):
                                         contents=file_obj.read(),
                                         content_type=content_type)
         obj_meta_dict['hash'] = etag
+        obj_meta_dict['last_modified'] = time.strftime("%Y-%m-%d %H:%M:%S")
         return obj_meta_dict
     
     def upload_via_http(self):
