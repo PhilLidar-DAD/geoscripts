@@ -5,6 +5,7 @@ import math
 # Tile size in meters
 _TILE_SIZE = 1000
 
+
 def _floor(x):
     return int(math.floor(x / float(_TILE_SIZE)) * _TILE_SIZE)
 
@@ -33,3 +34,7 @@ if __name__ == '__main__':
     print "Upper right: ({0}, {1})".format(ur_x, ur_y)
     print "Lower left: ({0}, {1})".format(ll_x, ll_y)
     print "Lower right: ({0}, {1})".format(lr_x, lr_y)
+
+    grid_id = "E%sN%s" % (ul_x / _TILE_SIZE,
+                          ul_y / _TILE_SIZE)
+    print "Grid ID: {0}".format(grid_id)
