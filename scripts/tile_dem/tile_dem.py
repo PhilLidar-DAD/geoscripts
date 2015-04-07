@@ -7,12 +7,13 @@ import os
 import osgeotools
 import sys
 
-_version = "0.1.55"
+_version = "0.1.59"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
 _LOG_LEVEL = logging.DEBUG
 _CONS_LOG_LEVEL = logging.INFO
 _TILE_SIZE = 1000
+_BUFFER = 50  # meters
 
 
 def _setup_logging(args):
@@ -96,10 +97,10 @@ if __name__ == '__main__':
     _logger.info("Resampled DEM extents:\n%s", resampled_dem["extents"])
 
     # Compare rasters
-    _logger.info("Comparing rasters...")
-    avg, std = osgeotools.compare_rasters(dem, resampled_dem)
-    _logger.info("Average difference: %s", avg)
-    _logger.info("Standard deviation: %s", std)
+    # _logger.info("Comparing rasters...")
+    # avg, std = osgeotools.compare_rasters(dem, resampled_dem)
+    # _logger.info("Average difference: %s", avg)
+    # _logger.info("Standard deviation: %s", std)
 
     # Open raster band
     raster_band = osgeotools.open_raster_band(resampled_dem, 1, True)
@@ -118,16 +119,19 @@ if __name__ == '__main__':
                              _TILE_SIZE):
 
             # Get tile of band array
-            tile = osgeotools.get_band_array_tile(resampled_dem, raster_band,
-                                                  tile_x, tile_y,
-                                                  _TILE_SIZE)
+            tile_data = osgeotools.get_band_array_tile(resampled_dem,
+                                                       raster_band,
+                                                       tile_x, tile_y,
+                                                       _TILE_SIZE)
 
             # If tile has data
-            if not tile is None:
+            if not tile_data is None:
+
+                tile, ul_x, ul_y = tile_data
 
                 # Create new tile geotransform
                 tile_gt = list(dem["geotransform"])
-                tile_gt[0], tile_gt[3] = tile_x, tile_y
+                tile_gt[0], tile_gt[3] = ul_x, ul_y
 
                 # Construct filename
                 filename = "E%sN%s_%s.tif" % (tile_x / _TILE_SIZE,
