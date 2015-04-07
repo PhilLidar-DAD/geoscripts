@@ -52,7 +52,7 @@ class CephStorageClient(object):
             return list(self.connection.get_container(container_name)[1])
         else:
             return list(self.connection.get_container(self.active_container_name)[1])
-    
+
     def upload_file_from_path(self, file_path, container=None):
         file_name = os.path.basename(file_path)
         if container is None:

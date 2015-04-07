@@ -75,7 +75,7 @@ ceph_client.connect()
 for path, subdirs, files in walk(grid_files_dir):
     for name in files:
         #Upload each file
-        grid_ref = path.rsplit("/")[-1]
+        grid_ref = name.rsplit(".")[0].rsplit("_")[0]
         file_path = join(path, name)
         #upload_file(file_path, grid_ref)
         obj_dict = ceph_client.upload_file_from_path(file_path)
