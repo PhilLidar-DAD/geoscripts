@@ -4,15 +4,16 @@ import os
 import random
 import sys
 
+
 try:
     from osgeo import ogr, osr, gdal, gdalnumeric, gdalconst
 except:
     sys.exit('ERROR: cannot find GDAL/OGR modules')
 
-_version = "0.1.55"
+_version = "0.1.57"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
-_BUFFER = 50 # meters
+_BUFFER = 50  # meters
 
 # Enable GDAL/OGR exceptions
 gdal.UseExceptions()
@@ -28,6 +29,7 @@ def world2pixel(gt, x, y):
     pixel_loc = gdal.ApplyGeoTransform(inv_gt, x, y)
     col_id, row_id = tuple([int(round(i, 0)) for i in pixel_loc])
     return col_id, row_id
+
 
 def _image2array(i):
     a = gdalnumeric.fromstring(i.tostring(), 'b')
@@ -191,8 +193,7 @@ def write_raster(path, driver_name, new_band_array, data_type, geotransform,
     del raster_dataset
 
 
-def resample_raster(raster, extents):
-    resampled_path = "resampled.tif"
+def resample_raster(raster, extents, resampled_path):
     # Assuming 1-band raster
 
     # Get new raster extents
@@ -232,7 +233,6 @@ def resample_raster(raster, extents):
     resampled.GetRasterBand(1).ComputeStatistics(False)
     # Flush data
     del resampled
-    return resampled_path
 
 
 def _estimate_sample_size(N):

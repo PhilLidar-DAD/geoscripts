@@ -6,8 +6,9 @@ import math
 import os
 import osgeotools
 import sys
+import tempfile
 
-_version = "0.1.59"
+_version = "0.1.60"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
 _LOG_LEVEL = logging.DEBUG
@@ -88,7 +89,11 @@ if __name__ == '__main__':
 
     # Resample DEM to tile extents
     _logger.info("Resampling image...")
-    resampled_dem_path = osgeotools.resample_raster(dem, tile_extents)
+    # Get a temporary file for resampled raster
+    temp = tempfile.NamedTemporaryFile()
+    resampled_dem_path = temp.name
+    _logger.debug("resample_raster = %s", resampled_dem_path)
+    osgeotools.resample_raster(dem, tile_extents, resampled_dem_path)
 
     # Open resampled DEM
     resampled_dem = osgeotools.open_raster(resampled_dem_path, args.prj_file)
@@ -97,10 +102,10 @@ if __name__ == '__main__':
     _logger.info("Resampled DEM extents:\n%s", resampled_dem["extents"])
 
     # Compare rasters
-    # _logger.info("Comparing rasters...")
-    # avg, std = osgeotools.compare_rasters(dem, resampled_dem)
-    # _logger.info("Average difference: %s", avg)
-    # _logger.info("Standard deviation: %s", std)
+    _logger.info("Comparing rasters...")
+    avg, std = osgeotools.compare_rasters(dem, resampled_dem)
+    _logger.info("Average difference: %s", avg)
+    _logger.info("Standard deviation: %s", std)
 
     # Open raster band
     raster_band = osgeotools.open_raster_band(resampled_dem, 1, True)
@@ -146,7 +151,9 @@ if __name__ == '__main__':
 
             tile_counter += 1
 
+        # exit(1)
+
     _logger.info("Total no. of tiles: {0}".format(tile_counter))
 
-    # Delete resampled DEM
-    os.remove(resampled_dem_path)
+    # Delete temporary resampled DEM
+    temp.close()
