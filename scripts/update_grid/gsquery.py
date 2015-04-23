@@ -4,7 +4,7 @@ import logging
 import os.path
 import requests
 
-_version = "0.2.1"
+_version = "0.2.2"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
 GEONODE_URL = "http://geonode.dream.upd.edu.ph/"
@@ -225,6 +225,8 @@ def transacton_update(typeName, search_id, search_value, field_id, field_value):
     </ogc:Filter>
   </wfs:Update>
 </wfs:Transaction>"""
+
+    _logger.debug("field_value = {0}".format(field_value))
 
     xml_input = update_template.replace(
         "<<<typeName>>>", typeName).replace(

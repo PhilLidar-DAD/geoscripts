@@ -6,7 +6,7 @@ import logging
 import os
 import sys
 
-_version = "0.1.1"
+_version = "0.2.1"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
 _LOG_LEVEL = logging.DEBUG
@@ -42,6 +42,8 @@ def _parse_arguments():
                         help="GRIDREF")
     parser.add_argument("-fid", "--field-id", required=True,
                         help="DSM/DTM/ORTHO")
+    parser.add_argument("-off", action="store_true",
+                        help="Reset availability to 0")
     args = parser.parse_args()
     return args
 
@@ -54,7 +56,7 @@ if __name__ == '__main__':
     _setup_logging(args)
 
     success = gsquery.transacton_update("geonode:grid", "GRIDREF", args.grid_id,
-                                        args.field_id, "1")
+                                        args.field_id, "0" if args.off else "1")
     if not success:
         _logger.info("Update failed:")
         _logger.error(success)
