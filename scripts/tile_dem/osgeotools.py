@@ -4,14 +4,16 @@ import os
 import random
 import sys
 
+
 try:
     from osgeo import ogr, osr, gdal, gdalnumeric, gdalconst
 except:
     sys.exit('ERROR: cannot find GDAL/OGR modules')
 
-_version = "0.1.53"
+_version = "0.1.57"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
+_BUFFER = 50  # meters
 
 # Enable GDAL/OGR exceptions
 gdal.UseExceptions()
@@ -27,6 +29,7 @@ def world2pixel(gt, x, y):
     pixel_loc = gdal.ApplyGeoTransform(inv_gt, x, y)
     col_id, row_id = tuple([int(round(i, 0)) for i in pixel_loc])
     return col_id, row_id
+
 
 def _image2array(i):
     a = gdalnumeric.fromstring(i.tostring(), 'b')
@@ -141,9 +144,13 @@ def get_band_array_tile(raster, raster_band, xoff, yoff, size):
     # xoff, yoff - coordinates of upper left corner
     # xsize, ysize - tile size
 
+    # Add buffers
+    ul_x, ul_y = xoff - _BUFFER, yoff + _BUFFER
+    lr_x, lr_y = xoff + size + _BUFFER, yoff - size - _BUFFER
+
     # Get tile bounding box pixel coordinates
-    ul_c, ul_r = world2pixel(raster["geotransform"], xoff, yoff)
-    lr_c, lr_r = world2pixel(raster["geotransform"], xoff + size, yoff - size)
+    ul_c, ul_r = world2pixel(raster["geotransform"], ul_x, ul_y)
+    lr_c, lr_r = world2pixel(raster["geotransform"], lr_x, lr_y)
     _logger.debug("ul_c = %s ul_r = %s lr_c = %s lr_r = %s", ul_c, ul_r,
                   lr_c, lr_r)
 
@@ -157,7 +164,7 @@ def get_band_array_tile(raster, raster_band, xoff, yoff, size):
         return None
 
     # return tile, tile_cols, tile_rows, ul_x, ul_y
-    return tile
+    return tile, ul_x, ul_y
 
 
 def write_raster(path, driver_name, new_band_array, data_type, geotransform,
@@ -186,13 +193,15 @@ def write_raster(path, driver_name, new_band_array, data_type, geotransform,
     del raster_dataset
 
 
-def resample_raster(raster, extents):
-    resampled_path = "resampled.tif"
+def resample_raster(raster, extents, resampled_path):
     # Assuming 1-band raster
 
     # Get new raster extents
     ul_x, ul_y = extents["min_x"], extents["max_y"]
     lr_x, lr_y = extents["max_x"], extents["min_y"]
+    # Add buffers
+    ul_x, ul_y = ul_x - _BUFFER, ul_y + _BUFFER
+    lr_x, lr_y = lr_x + _BUFFER, lr_y - _BUFFER
     _logger.debug(
         "ul_x = %s ul_y = %s lr_x = %s lr_y = %s", ul_x, ul_y, lr_x, lr_y)
     # Get new geotransform
@@ -224,7 +233,6 @@ def resample_raster(raster, extents):
     resampled.GetRasterBand(1).ComputeStatistics(False)
     # Flush data
     del resampled
-    return resampled_path
 
 
 def _estimate_sample_size(N):

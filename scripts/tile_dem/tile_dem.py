@@ -6,13 +6,15 @@ import math
 import os
 import osgeotools
 import sys
+import tempfile
 
-_version = "0.1.55"
+_version = "0.1.60"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
 _LOG_LEVEL = logging.DEBUG
 _CONS_LOG_LEVEL = logging.INFO
 _TILE_SIZE = 1000
+_BUFFER = 50  # meters
 
 
 def _setup_logging(args):
@@ -87,7 +89,11 @@ if __name__ == '__main__':
 
     # Resample DEM to tile extents
     _logger.info("Resampling image...")
-    resampled_dem_path = osgeotools.resample_raster(dem, tile_extents)
+    # Get a temporary file for resampled raster
+    temp = tempfile.NamedTemporaryFile()
+    resampled_dem_path = temp.name
+    _logger.debug("resample_raster = %s", resampled_dem_path)
+    osgeotools.resample_raster(dem, tile_extents, resampled_dem_path)
 
     # Open resampled DEM
     resampled_dem = osgeotools.open_raster(resampled_dem_path, args.prj_file)
@@ -118,16 +124,19 @@ if __name__ == '__main__':
                              _TILE_SIZE):
 
             # Get tile of band array
-            tile = osgeotools.get_band_array_tile(resampled_dem, raster_band,
-                                                  tile_x, tile_y,
-                                                  _TILE_SIZE)
+            tile_data = osgeotools.get_band_array_tile(resampled_dem,
+                                                       raster_band,
+                                                       tile_x, tile_y,
+                                                       _TILE_SIZE)
 
             # If tile has data
-            if not tile is None:
+            if not tile_data is None:
+
+                tile, ul_x, ul_y = tile_data
 
                 # Create new tile geotransform
                 tile_gt = list(dem["geotransform"])
-                tile_gt[0], tile_gt[3] = tile_x, tile_y
+                tile_gt[0], tile_gt[3] = ul_x, ul_y
 
                 # Construct filename
                 filename = "E%sN%s_%s.tif" % (tile_x / _TILE_SIZE,
@@ -142,7 +151,9 @@ if __name__ == '__main__':
 
             tile_counter += 1
 
+        # exit(1)
+
     _logger.info("Total no. of tiles: {0}".format(tile_counter))
 
-    # Delete resampled DEM
-    os.remove(resampled_dem_path)
+    # Delete temporary resampled DEM
+    temp.close()
