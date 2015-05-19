@@ -1,4 +1,4 @@
-import swiftclient, warnings, os, mimetypes, logging
+import swiftclient, warnings, os, mimetypes, logging, time
 from pprint import pprint
 from os import listdir
 from os.path import isfile, join
@@ -52,7 +52,7 @@ class CephStorageClient(object):
             return list(self.connection.get_container(container_name)[1])
         else:
             return list(self.connection.get_container(self.active_container_name)[1])
-    
+
     def upload_file_from_path(self, file_path, container=None):
         file_name = os.path.basename(file_path)
         if container is None:
@@ -66,17 +66,24 @@ class CephStorageClient(object):
         except KeyError:
             pass
         
-        self.log.info("Uploading  file {0} [size:{1} | type:{2}]...".format( file_name,
-                                                                        os.stat(file_path).st_size,
-                                                                        content_type))
+        obj_meta_dict = {   'bytes': os.stat(file_path).st_size, 
+                            #'last_modified': None, 
+                            #'hash': None, 
+                            'name': file_name, 
+                            'content_type': content_type }
+        
+        self.log.info("Uploading  file {0} [size:{1} | type:{2}]...".format(    obj_meta_dict['name'],
+                                                                                obj_meta_dict['bytes'],
+                                                                                obj_meta_dict['content_type']))
+
         with open(file_path, 'r') as file_obj:
-            return self.connection.put_object( container, 
+            etag = self.connection.put_object( container, 
                                         file_name,
                                         contents=file_obj.read(),
                                         content_type=content_type)
-        
-        #return self.connection.get_object(container, file_name)
-        
+        obj_meta_dict['hash'] = etag
+        obj_meta_dict['last_modified'] = time.strftime("%Y-%m-%d %H:%M:%S")
+        return obj_meta_dict
     
     def upload_via_http(self):
         pass

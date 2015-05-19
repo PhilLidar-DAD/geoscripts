@@ -12,7 +12,7 @@ wfs_version="1.0.0"
 username="admin"
 password="geoserver"
 method="Get"
-base_url="http://192.168.56.52:8080/geoserver/wfs"
+base_url="http://cephgeo.lan.dream.upd.edu.ph:8080/geoserver/wfs"
 
 request = { "version"       : wfs_version, 
             "request"       : "GetFeature",
@@ -29,6 +29,8 @@ wfs_xml = u.read()
 wfs_etree = etree.fromstring(wfs_xml)
 wfs_nsmap = wfs_etree.nsmap
 wfs_nsmap.pop(None,None)
+
+pprint(wfs_nsmap)
 
 #Get a list of gridrefs using xpath
 gridrefs = wfs_etree.xpath("//geonode:GRID_REF/text()",

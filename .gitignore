@@ -1,4 +1,6 @@
 # build artifacts
 *.pyc
 *.egg-info
+*.log
+logs/*.log
 
