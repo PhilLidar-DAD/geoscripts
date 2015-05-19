@@ -3,7 +3,6 @@ from pprint import pprint
 from os import listdir, walk
 from os.path import isfile, isdir, join
 import argparse, time, os
-from arcrest.admin.admin_objects import Directories
 
 
 def get_cwd():
