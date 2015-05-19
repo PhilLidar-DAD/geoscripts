@@ -88,7 +88,7 @@ grid_files_dir = None
 if isdir(args.dir):
     grid_files_dir = args.dir
     print("Uploading files from [{0}].".format(args.dir))
-    logger.log.info("Uploading files from [{0}].".format(args.dir))
+    logger.info("Uploading files from [{0}].".format(args.dir))
 else:
     raise Exception("ERROR: [{0}] is not a valid directory.".format(args.dir))
 
@@ -107,12 +107,12 @@ ceph_client = CephStorageClient(CEPH_OGW['default']['USER'], CEPH_OGW['default']
 
 #Connect to Ceph Storage
 ceph_client.connect()
-logger.log.info("Connected to Ceph OGW at URI [{0}]",format(CEPH_OGW['default']['URL']))
+logger.info("Connected to Ceph OGW at URI [{0}]",format(CEPH_OGW['default']['URL']))
 
 #List of allowed file extensions
 allowed_files_exts = ["tif", "laz"]
-logger.log.info("Script will now upload files with the extensions [{0}]".format(allowed_files_exts)) 
-logger.log.info("=====================================================================".format(allowed_files_exts)) 
+logger.info("Script will now upload files with the extensions [{0}]".format(allowed_files_exts)) 
+logger.info("=====================================================================".format(allowed_files_exts)) 
         
 for path, subdirs, files in walk(grid_files_dir):
     for name in files:
@@ -128,10 +128,10 @@ for path, subdirs, files in walk(grid_files_dir):
             obj_dict = ceph_client.upload_file_from_path(file_path)
             obj_dict['grid_ref'] = grid_ref
             uploaded_objects.append(obj_dict)
-            logger.log.info("Uploaded file [{0}]".format(join(path, name))) 
+            logger.info("Uploaded file [{0}]".format(join(path, name))) 
         
         else:
-            logger.log.debug("Skipped file [{0}]".format(join(path, name))) 
+            logger.debug("Skipped file [{0}]".format(join(path, name))) 
         
 #Close Ceph Connection
 ceph_client.close_connection()
