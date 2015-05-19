@@ -2,12 +2,12 @@
 from pprint import pprint
 from os import listdir, walk
 from os.path import isfile, isdir, join
-import argparse, time
+import argparse, time, os
 from ceph_client import CephStorageClient
 import swiftclient, warnings, mimetypes, logging, cPickle
 
 def get_cwd():
-    cur_path = path.realpath(__file__)
+    cur_path = os.path.realpath(__file__)
     if "?" in cur_path:
         return cur_path.rpartition("?")[0].rpartition("/")[0]+"/"
     else:
@@ -17,7 +17,7 @@ def get_cwd():
 activate_this_file = "~/.virtualenvs/geonode/bin/activate_this.py"
 
 #Default log filepath
-log_filepath = get_cwd()+"bulk_upload.log"
+log_filepath = get_cwd()+"logs/bulk_upload.log"
 
 #Ceph Object Gateway Settings
 CEPH_OGW = {
