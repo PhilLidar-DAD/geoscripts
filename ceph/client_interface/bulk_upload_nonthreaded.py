@@ -81,6 +81,8 @@ import swiftclient, warnings, mimetypes, logging, cPickle
 
 #if __name__ == "__main__":
 
+setup_dump_and_logs()
+
 # Initialize logging
 logging.basicConfig(filename=log_filepath,level=logging.DEBUG)
 logger = logging.getLogger('bulk_upload_nonthreaded.py')
@@ -97,8 +99,6 @@ logformat = logging.Formatter(
 stream.setFormatter(logformat)
 
 logger.addHandler(stream)
-
-setup_dump_and_logs()
 
 #grid_files_dir = "/home/geonode/grid_data"
 grid_files_dir = None
