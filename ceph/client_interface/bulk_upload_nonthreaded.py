@@ -21,7 +21,7 @@ def setup_dump_and_logs():
         if not os.path.exists(join(cwd,d)):
             os.makedirs(join(cwd,d))
     
-    logfiles = ["bulk_upload.log", "ceph_storage.log"]
+    logfiles = ["logs/bulk_upload.log", "logs/ceph_storage.log"]
     
     for f in logfiles:  
         if not os.path.isfile(os.path.join(cwd, f)): 
