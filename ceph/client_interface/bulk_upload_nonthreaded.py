@@ -56,6 +56,12 @@ parser.add_argument("-l", "--logfile",dest="logfile",
 args = parser.parse_args()
 pprint(args)
 
+#Check if --logfile is set
+if args.logfile is not None:
+    if isfile(args.logfile):
+        log_filepath = args.logfile
+                    
+#Try activating the virtualenv, error out if it cannot be activated
 #Check if --virtualenv is set
 if args.venv is not None:
     if isfile(args.venv):
@@ -63,19 +69,12 @@ if args.venv is not None:
     else:
         raise Exception("ERROR: Failed to activate environment. Cannot find\n \
                             virtualenv activate file in: [{0}]".format(args.venv))
-
-#Check if --logfile is set
-if args.logfile is not None:
-    if isfile(args.logfile):
-        log_filepath = args.logfile
-                    
-#Try activating the virtualenv, error out if it cannot be activated
-try:
-    execfile(activate_this_file, dict(__file__=activate_this_file))
-except IOError as e:
-    print "ERROR: Failed to activate environment. Check if virtualenv\n \
-             activate file is found in [{0}]".format(activate_this_file)
-    raise e
+    try:
+        execfile(activate_this_file, dict(__file__=activate_this_file))
+    except IOError as e:
+        print "ERROR: Failed to activate environment. Check if virtualenv\n \
+                 activate file is found in [{0}]".format(activate_this_file)
+        raise e
 
 #Import after activating virtualenv
 from ceph_client import CephStorageClient
