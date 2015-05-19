@@ -107,7 +107,7 @@ ceph_client = CephStorageClient(CEPH_OGW['default']['USER'], CEPH_OGW['default']
 
 #Connect to Ceph Storage
 ceph_client.connect()
-logger.info("Connected to Ceph OGW at URI [{0}]",format(CEPH_OGW['default']['URL']))
+logger.info("Connected to Ceph OGW at URI [{0}]",format(str(CEPH_OGW['default']['URL'])))
 
 #List of allowed file extensions
 allowed_files_exts = ["tif", "laz"]
