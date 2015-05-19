@@ -3,6 +3,7 @@ from pprint import pprint
 from os import listdir, walk
 from os.path import isfile, isdir, join
 import argparse, time, os
+from arcrest.admin.admin_objects import Directories
 
 
 def get_cwd():
@@ -11,6 +12,22 @@ def get_cwd():
         return cur_path.rpartition("?")[0].rpartition("/")[0]+"/"
     else:
         return cur_path.rpartition("/")[0]+"/"
+
+def setup_dump_and_logs():
+    
+    directories = ["dump", "logs"]
+    cwd = get_cwd()
+    
+    for d in directories:
+        if not os.path.exists(join(cwd,d)):
+            os.makedirs(join(cwd,d))
+    
+    logfiles = ["bulk_upload.log", "ceph_storage.log"]
+    
+    for f in logfiles:  
+        if not os.path.isfile(os.path.join(cwd, f)): 
+            with open(os.path.join(cwd, f), 'wb') as temp_file:
+                temp_file.write("") 
 
 #Default virtualenv path to activate file
 activate_this_file = "~/.virtualenvs/geonode/bin/activate_this.py"
@@ -82,6 +99,8 @@ logformat = logging.Formatter(
 stream.setFormatter(logformat)
 
 logger.addHandler(stream)
+
+setup_dump_and_logs()
 
 #grid_files_dir = "/home/geonode/grid_data"
 grid_files_dir = None
