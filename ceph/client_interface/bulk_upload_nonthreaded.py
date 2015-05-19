@@ -3,6 +3,8 @@ from pprint import pprint
 from os import listdir, walk
 from os.path import isfile, isdir, join
 import argparse, time
+from ceph_client import CephStorageClient
+import swiftclient, warnings, mimetypes, logging, cPickle
 
 def get_cwd():
     cur_path = path.realpath(__file__)
@@ -59,8 +61,8 @@ except IOError as e:
              activate file is found in [{0}]".format(activate_this_file)
     raise e
 
-from ceph_client import CephStorageClient
-import swiftclient, warnings, mimetypes, logging, cPickle
+
+
 
 #if __name__ == "__main__":
 
