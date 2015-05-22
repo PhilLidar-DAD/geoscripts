@@ -133,7 +133,8 @@ allowed_files_exts = ["tif", "laz"]
 logger.info("Script will now upload files with the extensions {0}".format(allowed_files_exts)) 
 logger.info("=====================================================================".format(allowed_files_exts)) 
 
-data_dump_file_path = "dump/uploaded_objects_{0}.txt".format(time.strftime("%Y-%m-%d-%H%M-%S"))
+top_dir_name = os.path.split(grid_files_dir)[-1]
+data_dump_file_path = "dump/uploaded_objects_[{0}]_{1}.txt".format(top_dir_name, time.strftime("%Y-%m-%d-%H%M-%S"))
 with open(data_dump_file_path, 'w') as dump_file:
     header_str = "NAME,LAST_MODIFIED,SIZE_IN_BYTES,CONTENT_TYPE,GEO_TYPE,FILE_HASH GRID_REF\n"
     dump_file.write(header_str);    
