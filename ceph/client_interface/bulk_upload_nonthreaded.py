@@ -135,7 +135,7 @@ logger.info("===================================================================
 
 data_dump_file_path = "dump/uploaded_objects_{0}.txt".format(time.strftime("%Y-%m-%d-%H%M-%S"))
 with open(data_dump_file_path, 'w') as dump_file:
-    header_str = "NAME:LAST_MODIFIED:SIZE_IN_BYTES:CONTENT_TYPE:GEO_TYPE:FILE_HASH GRID_REF\n"
+    header_str = "NAME,LAST_MODIFIED,SIZE_IN_BYTES,CONTENT_TYPE,GEO_TYPE,FILE_HASH GRID_REF\n"
     dump_file.write(header_str);    
     for path, subdirs, files in walk(grid_files_dir):
         for name in files:
@@ -173,7 +173,7 @@ with open(data_dump_file_path, 'w') as dump_file:
                                                 file_hash = obj_meta_dict['hash'],
                                                 grid_ref = obj_meta_dict['grid_ref'])
                 """
-                dump_file.write("{0}:{1}:{2}:{3}:{4}:{5}\n".format( obj_dict['name'],
+                dump_file.write("{0},{1},{2},{3},{4},{5}\n".format( obj_dict['name'],
                                                                     obj_dict['last_modified'],
                                                                     obj_dict['bytes'],
                                                                     obj_dict['content_type'],
