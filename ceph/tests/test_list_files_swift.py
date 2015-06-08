@@ -5,8 +5,8 @@ from os.path import isfile, join
 
 
 user = 'geonode:swift'
-key = ***REMOVED***
-
+key = 'OxWZDDFGVvLGUFMFznS2tn3xTKsLcKnghTYArp85'
+#key = 'UcRkNyYRmiFUHseH89qFLDSSPy4Rqmsp3tjoyrHm'
 original_filters = warnings.filters[:]
 
 # Ignore warnings.
@@ -14,11 +14,14 @@ warnings.simplefilter("ignore")
 
 try:
     conn = swiftclient.Connection(
-            user=user,
+            user='geonode:swift',
             key=key,
-            authurl='https://cephclient.lan.dream.upd.edu.ph/auth',
+            authurl='https://192.168.20.52/auth',
             insecure=True,
     )
+
+    container_name = 'geo-container'
+    #conn.put_container(container_name)
 
     print "\n Listing Containers"
     print "====================="
