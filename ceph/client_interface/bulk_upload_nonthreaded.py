@@ -186,7 +186,8 @@ with open(data_dump_file_path, 'w') as dump_file:
         # Index all previously uploaded files into list
         with open(prev_data_dump_file_path, "r") as prev_dump_file:
             for csv_line in prev_dump_file:
-                list_of_uploaded_csv.append(csv_line)
+                if not csv_line == header_str:
+                    list_of_uploaded_csv.append(csv_line)
         
         logger.info("Loaded [{0}] objects from dump file".format(len(list_of_uploaded_csv))) 
         
