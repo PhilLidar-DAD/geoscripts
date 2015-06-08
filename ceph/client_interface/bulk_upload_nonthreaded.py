@@ -8,9 +8,9 @@ import argparse, time, os
 def get_cwd():
     cur_path = os.path.realpath(__file__)
     if "?" in cur_path:
-        return cur_path.rpartition("?")[0].rpartition("/")[0]+"/"
+        return cur_path.rpartition("?")[0].rpartition(os.path.sep)[0]+os.path.sep
     else:
-        return cur_path.rpartition("/")[0]+"/"
+        return cur_path.rpartition(os.path.sep)[0]+os.path.sep
 
 def setup_dump_and_logs():
     
@@ -48,12 +48,16 @@ CEPH_OGW = {
 
 #Parse CLI arguments
 parser = argparse.ArgumentParser()
+
 parser.add_argument("dir", 
                     help="Directory containing the tiled files and named according to their grid reference")
 parser.add_argument("-e", "--virtualenv",dest="venv",
                     help="Path to the virtualenv activate_this.py file")
 parser.add_argument("-l", "--logfile",dest="logfile",
-                    help="Path to the virtualenv activate_this.py file")
+                    help="Path to log file for this upload")
+parser.add_argument("-r", "--resume",dest="resume",
+                    help="Resume from a interrupted upload using the CSV dump")
+
 args = parser.parse_args()
 pprint(args)
 
@@ -79,7 +83,7 @@ if args.venv is not None:
 
 #Import after activating virtualenv
 from ceph_client import CephStorageClient
-import swiftclient, warnings, mimetypes, logging, cPickle
+import warnings, mimetypes, logging
 
 #if __name__ == "__main__":
 
@@ -123,7 +127,6 @@ warnings.simplefilter("ignore")
 uploaded_objects= []
 ceph_client = CephStorageClient(CEPH_OGW['default']['USER'], CEPH_OGW['default']['KEY'], CEPH_OGW['default']['URL'], container_name=CEPH_OGW['default']['CONTAINER'])
 
-
 #Connect to Ceph Storage
 ceph_client.connect()
 logger.info("Connected to Ceph OGW at URI [{0}]".format(CEPH_OGW['default']['URL']))
@@ -133,65 +136,107 @@ allowed_files_exts = ["tif", "laz"]
 logger.info("Script will now upload files with the extensions {0}".format(allowed_files_exts)) 
 logger.info("=====================================================================".format(allowed_files_exts)) 
 
-top_dir_name = filter(None, grid_files_dir.split("/"))[-1]
+top_dir_name = filter(None, grid_files_dir.split(os.path.sep))[-1]
 data_dump_file_path = "dump/uploaded_objects_[{0}]_{1}.txt".format(top_dir_name, time.strftime("%Y-%m-%d-%H%M-%S"))
+
 with open(data_dump_file_path, 'w') as dump_file:
     header_str = "NAME,LAST_MODIFIED,SIZE_IN_BYTES,CONTENT_TYPE,GEO_TYPE,FILE_HASH GRID_REF\n"
     dump_file.write(header_str);    
-    for path, subdirs, files in walk(grid_files_dir):
-        for name in files:
-            #Upload each file
-            filename_tokens = name.rsplit(".")
-            
-            #Check if file is in allowed file extensions list 
-            if filename_tokens[-1] in allowed_files_exts:
-                grid_ref = filename_tokens[0].rsplit("_")[0]
-                file_path = join(path, name)
+    
+    # No previous metadata dump file to resume from specified
+    if args.resume is None:
+        for path, subdirs, files in walk(grid_files_dir):
+                for name in files:
+                    #Upload each file
+                    filename_tokens = name.rsplit(".")
+                    
+                    #Check if file is in allowed file extensions list 
+                    if filename_tokens[-1] in allowed_files_exts:
+                        grid_ref = filename_tokens[0].rsplit("_")[0]
+                        file_path = join(path, name)
+                        
+                        #upload_file(file_path, grid_ref)
+                        obj_dict = ceph_client.upload_file_from_path(file_path)
+                        obj_dict['grid_ref'] = grid_ref
+                        uploaded_objects.append(obj_dict)
+                        logger.info("Uploaded file [{0}]".format(join(path, name)))
+                        
+                        ### TODO ###
+                        dump_file.write("{0},{1},{2},{3},{4},{5}\n".format( obj_dict['name'],
+                                                                            obj_dict['last_modified'],
+                                                                            obj_dict['bytes'],
+                                                                            obj_dict['content_type'],
+                                                                            obj_dict['hash'],
+                                                                            obj_dict['grid_ref']));
+                    else:
+                        logger.debug("Skipped file [{0}]".format(join(path, name))) 
+        
+    else:
+        csv_delimiter =','
+        csv_columns   = 6
+        list_of_uploaded_csv=[]
+        prev_data_dump_file_path = args.resume
+        new_dump_file = data_dump_file_path
+        
+        logger.info("Resuming previous upload from dump file[{0}]".format(prev_data_dump_file_path))
+        # Check and read specified dump file to resume to
+        if not os.path.isfile(prev_data_dump_file_path):
+            raise Exception("Dump file [{0}] is not a valid file!".format(prev_data_dump_file_path))
+        
+        # Index all previously uploaded files into list
+        with open(prev_data_dump_file_path, "r") as prev_dump_file:
+            for csv_line in prev_dump_file:
+                list_of_uploaded_csv.append(csv_line)
+        
+        logger.info("Loaded [{0}] objects from dump file".format(len(list_of_uploaded_csv))) 
+        
+        # Remove last object in list (assume that last object is a broken upload)
+        del list_of_uploaded_csv[-1]
+        
+        # Write previous metadata into new dump file    
+        logger.info("Writing previously uploaded object metadata into new dump file...")
+        dump_file.writelines(list_of_uploaded_csv)
+        logger.info("Wrote [{0}] object metadata CSVs into new dump file...".format(len(list_of_uploaded_csv)))
+        
+        # Upload the objects, skipping those in the list of previously uploaded
+        for path, subdirs, files in walk(grid_files_dir):
+            for name in files:
                 
-                #upload_file(file_path, grid_ref)
-                obj_dict = ceph_client.upload_file_from_path(file_path)
-                obj_dict['grid_ref'] = grid_ref
-                uploaded_objects.append(obj_dict)
-                logger.info("Uploaded file [{0}]".format(join(path, name)))
+                #Upload each file
+                filename_tokens = name.rsplit(".")
                 
-                ### TODO ###
-                # write metadata for file into dumpfile in CSV format
-                """
-                    {   'bytes': os.stat(file_path).st_size, 
-                        #'last_modified': None, 
-                        #'hash': None, 
-                        'name': file_name, 
-                        'content_type': content_type,
-                        'grid_ref' : None
-                         
-                    }
-                    ceph_obj = CephDataObject(  name = obj_meta_dict['name'],
-                                                #last_modified = time.strptime(obj_meta_dict['last_modified'], "%Y-%m-%d %H:%M:%S"),
-                                                last_modified = obj_meta_dict['last_modified'],
-                                                size_in_bytes = obj_meta_dict['bytes'],
-                                                content_type = obj_meta_dict['content_type'],
-                                                geo_type = utils.file_classifier(obj_meta_dict['name']),
-                                                file_hash = obj_meta_dict['hash'],
-                                                grid_ref = obj_meta_dict['grid_ref'])
-                """
-                dump_file.write("{0},{1},{2},{3},{4},{5}\n".format( obj_dict['name'],
+                #Check if file is in allowed file extensions list 
+                if filename_tokens[-1] in allowed_files_exts:
+                    grid_ref = filename_tokens[0].rsplit("_")[0]
+                    file_path = join(path, name)
+                    
+                    #upload_file(file_path, grid_ref)
+                    obj_dict = ceph_client.upload_file_from_path(file_path)
+                    obj_dict['grid_ref'] = grid_ref
+                    uploaded_objects.append(obj_dict)
+                    logger.info("Uploaded file [{0}]".format(join(path, name)))
+                    
+                    ### TODO ###
+                    # write metadata for file into dumpfile in CSV format
+                    metadata_csv="{0},{1},{2},{3},{4},{5}".format(obj_dict['name'],
                                                                     obj_dict['last_modified'],
                                                                     obj_dict['bytes'],
                                                                     obj_dict['content_type'],
                                                                     obj_dict['hash'],
-                                                                    obj_dict['grid_ref']));
-            else:
-                logger.debug("Skipped file [{0}]".format(join(path, name))) 
-    
-    dump_file.write("---END---\n");
+                                                                    obj_dict['grid_ref'])
+                    # Skip if previously uploaded
+                    if metadata_csv not in list_of_uploaded_csv:
+                        dump_file.writelines([metadata_csv,]);
+                    else:
+                        logger.debug("Skipped previously uploaded file [{0}]".format(join(path, name))) 
+                else:
+                    logger.debug("Skipped unallowed file [{0}]".format(join(path, name)))
         
+            
+    dump_file.write("---END---\n");
+    
 #Close Ceph Connection
 ceph_client.close_connection()
-
-#Write uploaded object details into a file
-# data_dump_file_path = "dump/uploaded_objects_{0}.txt".format(time.strftime("%Y-%m-%d-%H%M-%S"))
-# with open(data_dump_file_path, 'w') as f:
-#     cPickle.dump(uploaded_objects,f)
 
 print("====================")
 print("Done Uploading!")
