@@ -5,7 +5,8 @@ from os.path import isfile, join
 
 
 user = 'geonode:swift'
-key = ***REMOVED***
+key = 'OxWZDDFGVvLGUFMFznS2tn3xTKsLcKnghTYArp85'
+ogw_url = 'https://192.168.20.52/auth'
 
 original_filters = warnings.filters[:]
 
@@ -16,7 +17,7 @@ try:
     conn = swiftclient.Connection(
             user=user,
             key=key,
-            authurl='https://cephclient.lan.dream.upd.edu.ph/auth',
+            authurl=ogw_url,
             insecure=True,
     )
 

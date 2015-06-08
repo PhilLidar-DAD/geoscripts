@@ -14,8 +14,9 @@ from os.path import isfile, join
 
 
 user = 'geonode:swift'
-key = ***REMOVED***
-container_name = 'geo-container'
+#key = ***REMOVED***
+key='OxWZDDFGVvLGUFMFznS2tn3xTKsLcKnghTYArp85'
+container_name = 'geocontainer'
 
 original_filters = warnings.filters[:]
 
@@ -26,7 +27,7 @@ try:
     conn = swiftclient.Connection(
             user=user,
             key=key,
-            authurl='https://cephclient.lan.dream.upd.edu.ph/auth',
+            authurl='https://192.168.20.52/auth',
             insecure=True,
     )
 
@@ -47,7 +48,7 @@ try:
         print "Deleting..."
         conn.delete_object(container_name, data['name'])
     print "=========================="
-    
+    conn.delete_container(container_name)    
     
 finally:
     warnings.filters = original_filters
