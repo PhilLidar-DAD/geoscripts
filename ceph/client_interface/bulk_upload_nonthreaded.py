@@ -40,8 +40,8 @@ log_filepath = get_cwd()+"logs/bulk_upload.log"
 CEPH_OGW = {
     'default' : {
         'USER' : 'geonode:swift',
-        'KEY' : ***REMOVED***,
-        'URL' : 'https://cephclient.lan.dream.upd.edu.ph',
+        'KEY' : 'OxWZDDFGVvLGUFMFznS2tn3xTKsLcKnghTYArp85',
+        'URL' : 'https://192.168.20.52',
         'CONTAINER' : 'geo-container',
     }
 }
