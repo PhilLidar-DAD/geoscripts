@@ -3,6 +3,7 @@ from pprint import pprint
 from os import listdir, walk
 from os.path import isfile, isdir, join
 import argparse, time, os
+from collections import OrderedDict
 
 
 def get_cwd():
@@ -174,65 +175,68 @@ with open(data_dump_file_path, 'w') as dump_file:
     else:
         csv_delimiter =','
         csv_columns   = 6
-        list_of_uploaded_csv=[]
+        uploaded_csv_dict=OrderedDict()     # Use ordered dictionary to remember roder fo insertion
         prev_data_dump_file_path = args.resume
         new_dump_file = data_dump_file_path
+        filenames_list=[]
         
         logger.info("Resuming previous upload from dump file[{0}]".format(prev_data_dump_file_path))
         # Check and read specified dump file to resume to
         if not os.path.isfile(prev_data_dump_file_path):
             raise Exception("Dump file [{0}] is not a valid file!".format(prev_data_dump_file_path))
         
-        # Index all previously uploaded files into list
+        # Index all previously uploaded files into list, using the filename as key
         with open(prev_data_dump_file_path, "r") as prev_dump_file:
             for csv_line in prev_dump_file:
                 if not csv_line == header_str:
-                    list_of_uploaded_csv.append(csv_line)
+                    metadata_list = csv_line.split(csv_delimiter)
+                    uploaded_csv_dict[metadata_list[0]]=csv_line
         
-        logger.info("Loaded [{0}] objects from dump file".format(len(list_of_uploaded_csv))) 
-        
-        # Remove last object in list (assume that last object is a broken upload)
-        del list_of_uploaded_csv[-1]
+        # Assume last entry as malformed, so remove it (could be the EOF)
+        uploaded_csv_dict.popitem(last=True)
+        logger.info("Loaded [{0}] objects from dump file".format(len(uploaded_csv_dict))) 
         
         # Write previous metadata into new dump file    
         logger.info("Writing previously uploaded object metadata into new dump file...")
-        dump_file.writelines(list_of_uploaded_csv)
-        logger.info("Wrote [{0}] object metadata CSVs into new dump file...".format(len(list_of_uploaded_csv)))
+        dump_file.writelines(uploaded_csv_dict.values())
+        logger.info("Wrote [{0}] object metadata CSVs into new dump file...".format(len(uploaded_csv_dict)))
         
         # Upload the objects, skipping those in the list of previously uploaded
+        filenames_list=uploaded_csv_dict.keys()
         for path, subdirs, files in walk(grid_files_dir):
             for name in files:
                 
-                #Upload each file
-                filename_tokens = name.rsplit(".")
-                
-                #Check if file is in allowed file extensions list 
-                if filename_tokens[-1] in allowed_files_exts:
-                    grid_ref = filename_tokens[0].rsplit("_")[0]
-                    file_path = join(path, name)
+                #Check if file has already been uploaded
+                if name not in filenames_list:
+                    #Upload each file
+                    filename_tokens = name.rsplit(".")
                     
-                    #upload_file(file_path, grid_ref)
-                    obj_dict = ceph_client.upload_file_from_path(file_path)
-                    obj_dict['grid_ref'] = grid_ref
-                    uploaded_objects.append(obj_dict)
-                    logger.info("Uploaded file [{0}]".format(join(path, name)))
-                    
-                    ### TODO ###
-                    # write metadata for file into dumpfile in CSV format
-                    metadata_csv="{0},{1},{2},{3},{4},{5}".format(obj_dict['name'],
-                                                                    obj_dict['last_modified'],
-                                                                    obj_dict['bytes'],
-                                                                    obj_dict['content_type'],
-                                                                    obj_dict['hash'],
-                                                                    obj_dict['grid_ref'])
-                    # Skip if previously uploaded
-                    if metadata_csv not in list_of_uploaded_csv:
+                    #Check if file is in allowed file extensions list 
+                    if filename_tokens[-1] in allowed_files_exts:
+                        grid_ref = filename_tokens[0].rsplit("_")[0]
+                        file_path = join(path, name)
+                        
+                        #upload_file(file_path, grid_ref)
+                        obj_dict = ceph_client.upload_file_from_path(file_path)
+                        obj_dict['grid_ref'] = grid_ref
+                        uploaded_objects.append(obj_dict)
+                        logger.info("Uploaded file [{0}]".format(join(path, name)))
+                        
+                        ### TODO ###
+                        # write metadata for file into dumpfile in CSV format
+                        metadata_csv="{0},{1},{2},{3},{4},{5}".format(obj_dict['name'],
+                                                                        obj_dict['last_modified'],
+                                                                        obj_dict['bytes'],
+                                                                        obj_dict['content_type'],
+                                                                        obj_dict['hash'],
+                                                                        obj_dict['grid_ref'])
+                        # Skip if previously uploaded
                         dump_file.writelines([metadata_csv,]);
+                        
                     else:
-                        logger.debug("Skipped previously uploaded file [{0}]".format(join(path, name))) 
+                        logger.debug("Skipped unallowed file [{0}]".format(join(path, name)))
                 else:
-                    logger.debug("Skipped unallowed file [{0}]".format(join(path, name)))
-        
+                        logger.debug("Skipped previously uploaded file [{0}]".format(join(path, name))) 
             
     dump_file.write("---END---\n");
     
