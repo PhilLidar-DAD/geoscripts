@@ -4,7 +4,7 @@ from os import listdir, walk
 from os.path import isfile, isdir, join
 import argparse, time, os
 from collections import OrderedDict
-
+from ConfigParser import SafeConfigParser
 
 def get_cwd():
     cur_path = os.path.realpath(__file__)
@@ -31,6 +31,11 @@ def setup_dump_and_logs():
 
 def write_obj_metadata_to_csv(obj_metadata):
     pass
+
+config_parser = SafeConfigParser()
+config_parser.read(get_cwd()+'config.ini')
+
+
 #Default virtualenv path to activate file
 activate_this_file = "~/.virtualenvs/geonode/bin/activate_this.py"
 
