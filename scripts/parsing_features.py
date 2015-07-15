@@ -18,7 +18,7 @@ RiverSystems = (
 )
 
 def get_raw_areas(workspace_feature_name, feature_name):
-	raw_data = None;
+	raw_data = None
 
 	url = "http://geonode.dream.upd.edu.ph/geoserver/wfs?request=GetFeature&typeName="
 	geonode_format = "{http://geonode.dream.upd.edu.ph/}"
