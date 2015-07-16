@@ -121,49 +121,10 @@ def CreateDir(outputDir,reg,prov,muni):
 
     return newOutputDir
 
-#def MosaicDEM(outputDirList):
-#    outputDirList = list(set(outputDirList))
-#
-#    for dirs in outputDirList:
-#        oldList = os.listdir(dirs)
-#        tempList = []
-#
-#        for x in oldList:
-#            tempList.append(x.split('_t')[0])
-#        newList = list(set(tempList))
-#
-#        for new in newList:
-#            demList = []
-#            for old in oldList:
-#                if old.__contains__(new) and 'aux' not in old:
-#                    demList.append(os.path.join(dirs,old))
-#            inDEM = ' '.join(demList)
-#
-#            mosaicDEM = os.path.join(dirs, new + '.tif')
-#            gdalwarp = 'gdalwarp -dstnodata -3.40282346639e+38'
-#
-#            fullCmd = ' '.join([gdalwarp,inDEM,mosaicDEM])
-#
-#            subprocess.call(fullCmd)
-#
-#            ds = gdal.Open(mosaicDEM)
-#
-#            ds.GetRasterBand(1).ComputeStatistics(0)
-#
-#        for x in oldList:
-#            if x.__contains__('temp'):
-#                os.remove(os.path.join(dirs,x))
-#        return
-
 def main():
     # Input clip extent
     # Must be in shapefile format
     # Include full path and file extension name
-    #fnExtent = ""
-    #while os.path.exists(fnExtent) == 0:
-    #    fnExtent = str(raw_input("Input clip extent:"))  # input Extent
-    #    if os.path.exists(fnExtent) == 0:
-    #        print 'File or directory not found. Please enter a valid file name.'
 
     # Open shapefile
     fnExtent = args.input_shapefile
@@ -182,10 +143,6 @@ def main():
 
     dis = args.dissolve
 
-    #dissolve = str(raw_input("Dissolve? (Y/N)"))
-    #if dissolve == 'Y':
-    #    dis = True
-
     print "DISSOLVE", dis
 
     # Output directory
@@ -194,10 +151,6 @@ def main():
         print "Directory not found"
         sys.exit()
 
-    #while os.path.exists(outputDir) == 0:
-    #    outputDir = str(raw_input("Output location:"))  # output location
-    #    if os.path.exists(outputDir) == 0:
-    #        print 'Directory not found. Please enter a valid directory name.'
 
     # Start timing
     startTime = time.time()
