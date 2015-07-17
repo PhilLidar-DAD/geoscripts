@@ -222,38 +222,39 @@ def main():
             # Loop through all the DEMs' filenames in srcDEM list
             ctr += 1
 
-        #MosaicDEM(outputDirList)
-        outputDirList = list(set(outputDirList))
+        if temp == True:
+            #MosaicDEM(outputDirList)
+            outputDirList = list(set(outputDirList))
 
-        for dirs in outputDirList:
-            oldList = os.listdir(dirs)
-            tempList = []
+            for dirs in outputDirList:
+                oldList = os.listdir(dirs)
+                tempList = []
 
-            for x in oldList:
-                tempList.append(x.split('_t')[0])
-            newList = list(set(tempList))
+                for x in oldList:
+                    tempList.append(x.split('_t')[0])
+                newList = list(set(tempList))
 
-            for new in newList:
-                demList = []
-                for old in oldList:
-                    if old.__contains__(new) and 'aux' not in old:
-                        demList.append(os.path.join(dirs,old))
-                inDEM = ' '.join(demList)
+                for new in newList:
+                    demList = []
+                    for old in oldList:
+                        if old.__contains__(new) and 'aux' not in old:
+                            demList.append(os.path.join(dirs,old))
+                    inDEM = ' '.join(demList)
 
-                mosaicDEM = os.path.join(dirs, new + '.tif')
-                gdalwarp = 'gdalwarp -dstnodata -3.40282346639e+38'
+                    mosaicDEM = os.path.join(dirs, new + '.tif')
+                    gdalwarp = 'gdalwarp -dstnodata -3.40282346639e+38'
 
-                fullCmd = ' '.join([gdalwarp,inDEM,mosaicDEM])
+                    fullCmd = ' '.join([gdalwarp,inDEM,mosaicDEM])
 
-                subprocess.call(fullCmd)
+                    subprocess.call(fullCmd)
 
-                ds = gdal.Open(mosaicDEM)
+                    ds = gdal.Open(mosaicDEM)
 
-                ds.GetRasterBand(1).ComputeStatistics(0)
+                    ds.GetRasterBand(1).ComputeStatistics(0)
 
-            for x in oldList:
-                if x.__contains__('temp'):
-                    os.remove(os.path.join(dirs,x))
+                for x in oldList:
+                    if x.__contains__('temp'):
+                        os.remove(os.path.join(dirs,x))
 
     endTime = time.time()  # End timing
     print '\nElapsed Time:', str("{0:.2f}".format(round(endTime - startTime,2))), 'seconds'
