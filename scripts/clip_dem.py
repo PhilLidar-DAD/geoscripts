@@ -191,9 +191,9 @@ def main():
             temp = False
             SpatialFilter(featExtent,layerCoverage)
             nscb = featExtent.GetFieldAsInteger('NSCB_CODE')
-            muni = featExtent.GetFieldAsString('MUNI')
-            prov = featExtent.GetFieldAsString('PROV')
-            reg = featExtent.GetFieldAsString('REG')
+            muni = featExtent.GetFieldAsString('CityMunic')
+            prov = featExtent.GetFieldAsString('Province')
+            reg = featExtent.GetFieldAsString('Region')
 
             newOutputDir = CreateDir(outputDir,reg,prov,muni)
             outputDirList.append(newOutputDir)
