@@ -40,7 +40,7 @@ def ClipDEM (dem, dis, muniFN,ctr,fnExtent,covPath,outputDir):
     YSize = str(int(abs((geotransform[5]))))
 
     # OPTIONS
-    gdalwarp = "gdalwarp -of GTiff -tap -crop_to_cutline -dstnodata -3.40282346639e+38"
+    gdalwarp = "gdalwarp -co \"COMPRESS=LZW\" -of GTiff -tap -crop_to_cutline -dstnodata -3.40282346639e+38"
     pixelSize = "-tr "+XSize+" "+YSize
     cwhere = "-cwhere FID="+str(ctr)
     cutline = "-cutline "+fnExtent
