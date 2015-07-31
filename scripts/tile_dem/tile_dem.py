@@ -5,10 +5,12 @@ import logging
 import math
 import os
 import osgeotools
+import random
+import string
 import sys
 import tempfile
 
-_version = "0.1.60"
+_version = "0.1.61"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
 _LOG_LEVEL = logging.DEBUG
@@ -90,8 +92,10 @@ if __name__ == '__main__':
     # Resample DEM to tile extents
     _logger.info("Resampling image...")
     # Get a temporary file for resampled raster
-    temp = tempfile.NamedTemporaryFile()
-    resampled_dem_path = temp.name
+    random_string = ''.join(random.choice(string.ascii_lowercase +
+                                          string.digits) for _ in range(16))
+    resampled_dem_path = os.path.join(tempfile.gettempdir(), "tile_dem_tmp_" +
+                                      random_string)
     _logger.debug("resample_raster = %s", resampled_dem_path)
     osgeotools.resample_raster(dem, tile_extents, resampled_dem_path)
 
@@ -156,4 +160,4 @@ if __name__ == '__main__':
     _logger.info("Total no. of tiles: {0}".format(tile_counter))
 
     # Delete temporary resampled DEM
-    temp.close()
+    os.remove(resampled_dem_path)
