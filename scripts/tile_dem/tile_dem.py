@@ -160,4 +160,5 @@ if __name__ == '__main__':
     _logger.info("Total no. of tiles: {0}".format(tile_counter))
 
     # Delete temporary resampled DEM
+    resampled_dem = None
     os.remove(resampled_dem_path)
