@@ -47,7 +47,7 @@ for ortho in lstFolder:
         pass
     else:
         print "Copying Orthophotos..."
-        srcOrtho = r"/mnt/geostorage/DPC/TERRA/"
+        srcOrtho = r"/mnt/geostorage/DPC/TERRA/Photos/"
         curr = os.path.join(srcOrtho,prov,ortho,'Ortho/')
     print curr
     for f in os.listdir(curr):
