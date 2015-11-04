@@ -39,17 +39,16 @@ geom = feature.GetGeometryRef()
 ctr = 1
 
 for ortho in lstFolder:
-    srcOrtho = r"/mnt/geostorage/DPC/TERRA/Photos/"
-    srcAdj = r"Ortho/Adjusted_Images/"
-    curr = os.path.join(srcOrtho,prov,ortho,srcAdj)
-    # curr = os.path.join(srcOrtho,prov,srcAdj)
+    srcOrtho = r"/mnt/geostorage/DPC/TERRA/Adjusted_Orthophotos/"
+    curr = os.path.join(srcOrtho,prov,ortho)
     
     if os.path.exists(curr):
         print "Copying Adjusted Orthophotos..."
         pass
     else:
         print "Copying Orthophotos..."
-        curr = curr.replace("Adjusted_Images/","")
+        srcOrtho = r"/mnt/geostorage/DPC/TERRA/"
+        curr = os.path.join(srcOrtho,prov,ortho,'Ortho/')
     print curr
     for f in os.listdir(curr):
         if f.endswith('tif'):
