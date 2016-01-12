@@ -16,7 +16,9 @@ if __name__ == "__main__":
     parser.add_argument("ceph_object_names", metavar='N', type=str, nargs='+',
                         help="Ceph object (s) name to be downloaded")
     parser.add_argument("-d", "--dirpath",dest="dirpath",
-                    help="Absolute directory path to which the file will be downloaded")
+                        help="Absolute directory path to which the file will be downloaded")
+    parser.add_argument("-p","--projection", dest="projection", 
+                        help="Specify a projection to transform the downloaded file")
     args = parser.parse_args()
 
     dirpath = os.path.dirname(os.path.realpath(__file__))
