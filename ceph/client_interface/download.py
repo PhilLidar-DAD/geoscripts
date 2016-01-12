@@ -1,6 +1,12 @@
 from ceph_client import CephStorageClient
 from pprint import pprint
 import argparse, os
+import gdal
+from osgeo import osr
+from time import gmtime, strftime
+
+class ProjectionException(Exception):
+    pass
 
 CEPH_OGW = {
     'default' : {
@@ -10,6 +16,32 @@ CEPH_OGW = {
         'CONTAINER' : 'geo-container',
     }
 }
+TMP_PATH="/tmp/tmp_ceph_objects/"
+
+def gdal_warp(src_file_path, dst_file_path, epsg_num):
+    # Open source dataset
+        src_ds = gdal.Open(src_file_path)
+        
+        # Define target SRS
+        dst_srs = osr.SpatialReference()
+        dst_srs.ImportFromEPSG(epsg_num)
+        dst_wkt = dst_srs.ExportToWkt()
+        
+        error_threshold = 0.125  # error threshold --> use same value as in gdalwarp
+        resampling = gdal.GRA_NearestNeighbour
+        
+        # Call AutoCreateWarpedVRT() to fetch default values for target raster dimensions and geotransform
+        tmp_ds = gdal.AutoCreateWarpedVRT( src_ds,
+                                           None, # src_wkt : left to default value --> will use the one from source
+                                           dst_wkt,
+                                           resampling,
+                                           error_threshold )
+        
+        # Create the final warped raster
+        dst_ds = gdal.GetDriverByName('GTiff').CreateCopy(dst_file_path, tmp_ds)
+        dst_ds = None
+
+
 if __name__ == "__main__":
     # Parse CLI Arguments
     parser = argparse.ArgumentParser()
@@ -18,21 +50,54 @@ if __name__ == "__main__":
     parser.add_argument("-d", "--dirpath",dest="dirpath",
                         help="Absolute directory path to which the file will be downloaded")
     parser.add_argument("-p","--projection", dest="projection", 
-                        help="Specify a projection to transform the downloaded file")
+                        help="Specify a projection/spatial reference system to transform the downloaded file")
     args = parser.parse_args()
 
-    dirpath = os.path.dirname(os.path.realpath(__file__))
+    # Set default dirpath is current working directory, otherwise use dirpath argument
+    dirpath = os.path.dirname(os.path.realpath(__file__))   
     if args.dirpath is not None:
         dirpath = args.dirpath
 
-    ceph_client = CephStorageClient(    CEPH_OGW['default']['USER'],
-                                        CEPH_OGW['default']['KEY'],
-                                        CEPH_OGW['default']['URL'],
-                                        container_name=CEPH_OGW['default']['CONTAINER'])
-    ceph_client.connect() # Initiate connection to Ceph
-
-    # pprint(ceph_client.list_files())
-    for ceph_obj in args.ceph_object_names:
-        ceph_client.download_file_to_path(ceph_obj, dirpath)   # Download object to target directory
-
-    ceph_client.close_connection()  # Close connection
+    if args.projection is None: #No specified projection to convert to
+        
+        ceph_client = CephStorageClient(    CEPH_OGW['default']['USER'],
+                                            CEPH_OGW['default']['KEY'],
+                                            CEPH_OGW['default']['URL'],
+                                            container_name=CEPH_OGW['default']['CONTAINER'])
+        ceph_client.connect() # Initiate connection to Ceph
+    
+        # pprint(ceph_client.list_files())
+        for ceph_obj in args.ceph_object_names:
+            ceph_client.download_file_to_path(ceph_obj, dirpath)   # Download object to target directory
+    
+        ceph_client.close_connection()  # Close connection
+        
+    else:
+        
+        #Check if projection is valid
+        prj_epsg_num=None
+        try:
+            prj_epsg_num=int(args.projection)
+        except ValueError:
+            raise ProjectionException("Non-numerical EPSG for projection: %s" % args.projection)
+        except Exception:
+            raise ProjectionException("Invalid EPSG snumber for projection: %s" % args.projection)
+        
+        #Download ceph objects to temporary folder
+        ceph_client = CephStorageClient(    CEPH_OGW['default']['USER'],
+                                            CEPH_OGW['default']['KEY'],
+                                            CEPH_OGW['default']['URL'],
+                                            container_name=CEPH_OGW['default']['CONTAINER'])
+        ceph_client.connect() # Initiate connection to Ceph
+    
+        # pprint(ceph_client.list_files())
+        tmp_dir = TMP_PATH+"%s" % strftime("%Y-%m-%d_%H%M%S", gmtime())
+        for ceph_obj in args.ceph_object_names:
+            ceph_client.download_file_to_path(ceph_obj, tmp_dir)   # Download object to target directory
+    
+        ceph_client.close_connection()  # Close connection
+        
+        #Convert each of them and direct output into FTP folder
+        for root, dirs, files in os.walk(tmp_dir):
+            for filename in files:
+                gdal_warp(os.path.join(root, filename), os.path.join(dirpath, filename), prj_epsg_num)
