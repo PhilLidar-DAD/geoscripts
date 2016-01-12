@@ -229,14 +229,14 @@ with open(data_dump_file_path, 'w') as dump_file:
                         
                         ### TODO ###
                         # write metadata for file into dumpfile in CSV format
-                        metadata_csv="{0},{1},{2},{3},{4},{5}".format(obj_dict['name'],
+                        metadata_csv="{0},{1},{2},{3},{4},{5}\n".format(obj_dict['name'],
                                                                         obj_dict['last_modified'],
                                                                         obj_dict['bytes'],
                                                                         obj_dict['content_type'],
                                                                         obj_dict['hash'],
                                                                         obj_dict['grid_ref'])
                         # Skip if previously uploaded
-                        dump_file.writelines([metadata_csv,]);
+                        dump_file.write(metadata_csv);
                         
                     else:
                         logger.debug("Skipped unallowed file [{0}]".format(join(path, name)))
