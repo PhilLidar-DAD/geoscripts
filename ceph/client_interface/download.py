@@ -77,8 +77,6 @@ if __name__ == "__main__":
     pprint(CEPH_OGW)
     print("TMP_PATH: %s" % TMP_PATH)
     
-    sys.exit
-    
     # Set default dirpath is current working directory, otherwise use dirpath argument
     dirpath = os.path.dirname(os.path.realpath(__file__))   
     if args.dirpath is not None:
@@ -86,10 +84,10 @@ if __name__ == "__main__":
 
     if args.projection is None: #No specified projection to convert to
         
-        ceph_client = CephStorageClient(    CEPH_OGW['default']['USER'],
-                                            CEPH_OGW['default']['KEY'],
-                                            CEPH_OGW['default']['URL'],
-                                            container_name=CEPH_OGW['default']['CONTAINER'])
+        ceph_client = CephStorageClient(    CEPH_OGW['user'],
+                                            CEPH_OGW['key'],
+                                            CEPH_OGW['url'],
+                                            container_name=CEPH_OGW['container'])
         ceph_client.connect() # Initiate connection to Ceph
     
         # pprint(ceph_client.list_files())
@@ -110,10 +108,10 @@ if __name__ == "__main__":
             raise ProjectionException("Invalid EPSG snumber for projection: %s" % args.projection)
         
         #Download ceph objects to temporary folder
-        ceph_client = CephStorageClient(    CEPH_OGW['default']['USER'],
-                                            CEPH_OGW['default']['KEY'],
-                                            CEPH_OGW['default']['URL'],
-                                            container_name=CEPH_OGW['default']['CONTAINER'])
+        ceph_client = CephStorageClient(    CEPH_OGW['user'],
+                                            CEPH_OGW['key'],
+                                            CEPH_OGW['url'],
+                                            container_name=CEPH_OGW['container'])
         ceph_client.connect() # Initiate connection to Ceph
     
         # pprint(ceph_client.list_files())
