@@ -70,7 +70,7 @@ if __name__ == "__main__":
     
     # Parse config file
     CONFIG = ConfigParser.ConfigParser()
-    CONFIG.read(os.path.join(os.path.dirname(os.path.realpath(__file__))), "config.ini")
+    CONFIG.read(os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.ini"))
     CEPH_OGW = build_ceph_dict(CONFIG)
     TMP_PATH = CONFIG.get("tmp_folder", "path")
     
