@@ -1,10 +1,22 @@
+import argparse, ConfigParser, os, sys
+
+CONFIG = ConfigParser.ConfigParser()
+CONFIG.read(os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.ini"))
+#activate_this_file = "/home/lipad/.virtualenvs/scriptenv/bin/activate_this.py"
+activate_this_file = CONFIG.get("env", "activatethis")
+execfile(activate_this_file, dict(__file__=activate_this_file))
+try:
+    execfile(activate_this_file, dict(__file__=activate_this_file))
+except IOError as e:
+    print "ERROR: Failed to activate environment. Check if virtualenv\n \
+             activate file is found in [{0}]".format(activate_this_file)
+    raise e
+
 from ceph_client import CephStorageClient
 from pprint import pprint
-import argparse, os, ConfigParser
 import gdal
 from osgeo import osr
 from time import gmtime, strftime
-import sys
 
 class ProjectionException(Exception):
     pass
@@ -48,6 +60,7 @@ def gdal_warp(src_file_path, dst_file_path, epsg_num):
 
 if __name__ == "__main__":
     # Parse CLI Arguments
+    
     parser = argparse.ArgumentParser()
     parser.add_argument("ceph_object_names", metavar='N', type=str, nargs='+',
                         help="Ceph object (s) name to be downloaded")
@@ -56,15 +69,10 @@ if __name__ == "__main__":
     parser.add_argument("-p","--projection", dest="projection", 
                         help="Specify a projection/spatial reference system to transform the downloaded file")
     args = parser.parse_args()
-    
+
     # Parse config file
-    CONFIG = ConfigParser.ConfigParser()
-    CONFIG.read(os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.ini"))
     CEPH_OGW = build_ceph_dict(CONFIG)
     TMP_PATH = CONFIG.get("tmp_folder", "path")
-    
-    pprint(CEPH_OGW)
-    print("TMP_PATH: %s" % TMP_PATH)
     
     # Set default dirpath is current working directory, otherwise use dirpath argument
     dirpath = os.path.dirname(os.path.realpath(__file__))   
