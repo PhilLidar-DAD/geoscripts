@@ -74,6 +74,9 @@ if __name__ == "__main__":
     CEPH_OGW = build_ceph_dict(CONFIG)
     TMP_PATH = CONFIG.get("tmp_folder", "path")
     
+    pprint(CEPH_OGW)
+    print("TMP_PATH: %s" % TMP_PATH)
+    
     sys.exit
     
     # Set default dirpath is current working directory, otherwise use dirpath argument
