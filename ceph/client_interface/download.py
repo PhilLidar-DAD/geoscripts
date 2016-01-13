@@ -1,13 +1,14 @@
 from ceph_client import CephStorageClient
 from pprint import pprint
-import argparse, os
+import argparse, os, ConfigParser
 import gdal
 from osgeo import osr
 from time import gmtime, strftime
+import sys
 
 class ProjectionException(Exception):
     pass
-
+"""
 CEPH_OGW = {
     'default' : {
         'USER' : 'geonode:swift',
@@ -17,6 +18,20 @@ CEPH_OGW = {
     }
 }
 TMP_PATH="/tmp/tmp_ceph_objects/"
+"""
+
+def build_ceph_dict(config):
+    dict1 = {}
+    options = config.options("ceph")
+    for option in options:
+        try:
+            dict1[option] = config.get("ceph", option)
+            if dict1[option] == -1:
+                print("skip: %s" % option)
+        except:
+            print("exception on %s!" % option)
+            dict1[option] = None
+    return dict1
 
 def gdal_warp(src_file_path, dst_file_path, epsg_num):
     # Open source dataset
@@ -52,7 +67,15 @@ if __name__ == "__main__":
     parser.add_argument("-p","--projection", dest="projection", 
                         help="Specify a projection/spatial reference system to transform the downloaded file")
     args = parser.parse_args()
-
+    
+    # Parse config file
+    CONFIG = ConfigParser.ConfigParser()
+    CONFIG.read(os.path.join(os.path.dirname(os.path.realpath(__file__))), "config.ini")
+    CEPH_OGW = build_ceph_dict(CONFIG)
+    TMP_PATH = CONFIG.get("tmp_folder", "path")
+    
+    sys.exit
+    
     # Set default dirpath is current working directory, otherwise use dirpath argument
     dirpath = os.path.dirname(os.path.realpath(__file__))   
     if args.dirpath is not None:
@@ -96,7 +119,14 @@ if __name__ == "__main__":
             ceph_client.download_file_to_path(ceph_obj, tmp_dir)   # Download object to target directory
     
         ceph_client.close_connection()  # Close connection
-        
+        """
+        EPSG:4683 /  PRS92        
+        WGS84 Bounds: 116.0900, 2.2500, 140.0800, 21.4300
+        Projected Bounds: 116.0883, 2.2501, 140.0789, 21.4320
+        Scope: Horizontal component of 3D system.
+        Last Revised: Aug. 27, 2007
+        Area: Philippines
+        """
         #Convert each of them and direct output into FTP folder
         for root, dirs, files in os.walk(tmp_dir):
             for filename in files:
