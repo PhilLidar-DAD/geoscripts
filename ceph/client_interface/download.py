@@ -8,17 +8,6 @@ import sys
 
 class ProjectionException(Exception):
     pass
-"""
-CEPH_OGW = {
-    'default' : {
-        'USER' : 'geonode:swift',
-        'KEY' : 'OxWZDDFGVvLGUFMFznS2tn3xTKsLcKnghTYArp85',
-        'URL' : 'https://192.168.20.52',
-        'CONTAINER' : 'geo-container',
-    }
-}
-TMP_PATH="/tmp/tmp_ceph_objects/"
-"""
 
 def build_ceph_dict(config):
     dict1 = {}
