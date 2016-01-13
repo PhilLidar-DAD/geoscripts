@@ -105,6 +105,8 @@ if __name__ == "__main__":
     
         # pprint(ceph_client.list_files())
         tmp_dir = TMP_PATH+"%s" % strftime("%Y-%m-%d_%H%M%S", gmtime())
+        if not os.path.exists(tmp_dir):
+            os.makedirs(tmp_dir)
         for ceph_obj in args.ceph_object_names:
             ceph_client.download_file_to_path(ceph_obj, tmp_dir)   # Download object to target directory
     
