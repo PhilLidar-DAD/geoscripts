@@ -25,10 +25,11 @@ if typeFile != "LAS" and typeFile != "LAZ":
 	sys.exit()
 
 driver = ogr.GetDriverByName('ESRI Shapefile')
-ctr = 0
+
 
 # Loop through the input directory
 for las in os.listdir(inDir):
+	ctr = 0
 	inLAS = os.path.join(inDir, las)
 
 	# Create temporary shapefile for LAZ's extent
@@ -50,15 +51,15 @@ for las in os.listdir(inDir):
 	print 'Centroid X', inX
 	print 'Centroid Y', inY
 
-	if extent[0] % 1000 > 0:
+	if inX % 1000 > 0:
 		flrMinX = int(math.floor(inX * 0.001)*1000)	
 	else:
-		flrMinX = extent[0]
+		flrMinX = inX
 
-	if extent[3] % 1000 > 0:
+	if inY % 1000 > 0:
 		flrMaxY = int(math.floor(inY * 0.001)*1000)+1000		
 	else:
-		flrMaxY = extent[3]
+		flrMaxY = inY
 
 	minX = str(int(round(flrMinX*0.001)))
 	maxY = str(int(round(flrMaxY*0.001)))
@@ -69,15 +70,15 @@ for las in os.listdir(inDir):
 	outFN = ''.join(['E',minX,'N',maxY,'_',typeFile,'.',fileExtn])
 	outPath = os.path.join(outDir,outFN)
 
-	if os.path.exists(outPath):
+	# Check if output filename is already exists
+	while os.path.exists(outPath):
 		print '\nWARNING:', outPath, 'already exists!'
 		ctr += 1
 		outFN = ''.join(['E',minX,'N',maxY,'_',typeFile,'_',str(ctr),'.',fileExtn])
 		outPath = os.path.join(outDir,outFN)
-		shutil.copy(inLAS,outPath)
-	else:
-		print outPath, 'copied successfully'
-		shutil.copy(inLAS,outPath)
+		
+	print outPath, 'copied successfully'
+	shutil.copy(inLAS,outPath)
 
 inDS.Destroy()
 driver.DeleteDataSource('temp.shp')
