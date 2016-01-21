@@ -25,29 +25,38 @@ if typeFile != "LAS" and typeFile != "LAZ":
 	sys.exit()
 
 driver = ogr.GetDriverByName('ESRI Shapefile')
+ctr = 0
 
+# Loop through the input directory
 for las in os.listdir(inDir):
 	inLAS = os.path.join(inDir, las)
 
+	# Create temporary shapefile for LAZ's extent
 	fullCmd = ' '.join(['lasboundary -i', inLAS, '-o temp.shp'])
 	print '\n', fullCmd
 
 	subprocess.call(fullCmd,shell=True)
 
+	# Open the temporary shapefile
 	inDS = driver.Open('temp.shp',0)
 	inLayer = inDS.GetLayer()
-	extent = inLayer.GetExtent()
+	inFeat = inLayer.GetNextFeature()
+	inGeom = inFeat.GetGeometryRef()
+	inCentroid = inGeom.Centroid()
 
-	print 'Raw min X', extent[0]
-	print 'Raw max Y', extent[3]
+	inX = inCentroid.GetX()
+	inY = inCentroid.GetY()
+	
+	print 'Centroid X', inX
+	print 'Centroid Y', inY
 
 	if extent[0] % 1000 > 0:
-		flrMinX = int(math.floor(extent[0] * 0.001)*1000)	
+		flrMinX = int(math.floor(inX * 0.001)*1000)	
 	else:
 		flrMinX = extent[0]
 
 	if extent[3] % 1000 > 0:
-		flrMaxY = int(math.floor(extent[3] * 0.001)*1000)+1000		
+		flrMaxY = int(math.floor(inY * 0.001)*1000)+1000		
 	else:
 		flrMaxY = extent[3]
 
@@ -62,6 +71,10 @@ for las in os.listdir(inDir):
 
 	if os.path.exists(outPath):
 		print '\nWARNING:', outPath, 'already exists!'
+		ctr += 1
+		outFN = ''.join(['E',minX,'N',maxY,'_',typeFile,'_',str(ctr),'.',fileExtn])
+		outPath = os.path.join(outDir,outFN)
+		shutil.copy(inLAS,outPath)
 	else:
 		print outPath, 'copied successfully'
 		shutil.copy(inLAS,outPath)
