@@ -26,14 +26,17 @@ for las in lstFolder:
 	srcLAS = r"/mnt/geostorage/DPC/TERRA/Adjusted_LAZ_Tiles/DREAM/"
 	curr = os.path.join(srcLAS,prov,las)
 
-	dst = os.path.join(args.output_folder,prov,las + '/')
+	dst = os.path.join(args.output_folder,prov,las)
+
 	# Check if adjusted
 	if os.path.exists(curr):
 		print "Copying Adjusted LAZ Tiles..."
-		dst = os.path.join(args.output_folder,'Adjusted/',prov,las + '/')
+		os.makedirs(os.path.join(args.output_folder,'Adjusted',prov,las))
+		dst = os.path.join(args.output_folder,'Adjusted/',prov,las + '/')	
 	else:
 		srcLAS = r"/mnt/geostorage/DPC/TERRA/LAS_Tiles/"
 		curr = os.path.join(srcLAS,prov,las,'LAS_FILES/LAZ/')
+		os.makedirs(os.path.join(args.output_folder,prov,las))
 		
 		# Check if LAZ
 		if os.path.exists(curr):
