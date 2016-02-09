@@ -9,6 +9,7 @@ import random
 import string
 import sys
 import tempfile
+import datetime
 
 _version = "0.1.61"
 print os.path.basename(__file__) + ": v" + _version
@@ -55,6 +56,9 @@ tiles from input DEM.",
 projection is the same.")
     parser.add_argument("-o", "--output-dir", required=True,
                         help="Path to output directory.")
+    parser.add_argument("-l", "--logfile", required=True,
+            help="Filename of logfile")
+
     args = parser.parse_args()
     return args
 
@@ -135,7 +139,7 @@ if __name__ == '__main__':
 
             # If tile has data
             if not tile_data is None:
-
+                ctr = 0
                 tile, ul_x, ul_y = tile_data
 
                 # Create new tile geotransform
@@ -147,16 +151,29 @@ if __name__ == '__main__':
                                               tile_y / _TILE_SIZE,
                                               args.type.upper())
                 tile_path = os.path.join(output_dir, filename)
+                print 'TILE_PATH', tile_path
+                print 'OUTPUT_DIR', output_dir
+                print 'FILENAME', filename
+
+                # Check if output filename is already exists
+                while os.path.exists(tile_path):
+                    print '\nWARNING:', tile_path, 'already exists'
+                    ctr += 1
+                    filename = filename.replace('.tif','_'+str(ctr)+'.tif')
+                    tile_path = os.path.join(output_dir, filename)
 
                 # Save new GeoTIFF
                 osgeotools.write_raster(tile_path, "GTiff", tile,
                                         osgeotools.gdalconst.GDT_Float32,
                                         tile_gt, dem, raster_band)
+                log_file = open(args.logfile, "a")
+                log_file.write(args.dem + ' --------- ' + filename + ' --------- ' + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '\n')
+
 
             tile_counter += 1
 
         # exit(1)
-
+        log_file.close()
     _logger.info("Total no. of tiles: {0}".format(tile_counter))
 
     # Delete temporary resampled DEM
