@@ -11,7 +11,7 @@ import sys
 import tempfile
 import datetime
 
-_version = "0.1.61"
+_version = "0.2.5"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
 _LOG_LEVEL = logging.DEBUG
@@ -58,7 +58,6 @@ projection is the same.")
                         help="Path to output directory.")
     parser.add_argument("-l", "--logfile", required=True,
             help="Filename of logfile")
-
     args = parser.parse_args()
     return args
 
@@ -125,7 +124,7 @@ if __name__ == '__main__':
     _logger.info("Generating tiles...")
     tile_counter = 0
     for tile_y in xrange(tile_extents["min_y"] + _TILE_SIZE,
-                         tile_extents["max_y"],
+                         tile_extents["max_y"] + _TILE_SIZE,
                          _TILE_SIZE):
         for tile_x in xrange(tile_extents["min_x"],
                              tile_extents["max_x"],
@@ -151,9 +150,6 @@ if __name__ == '__main__':
                                               tile_y / _TILE_SIZE,
                                               args.type.upper())
                 tile_path = os.path.join(output_dir, filename)
-                print 'TILE_PATH', tile_path
-                print 'OUTPUT_DIR', output_dir
-                print 'FILENAME', filename
 
                 # Check if output filename is already exists
                 while os.path.exists(tile_path):
@@ -168,7 +164,6 @@ if __name__ == '__main__':
                                         tile_gt, dem, raster_band)
                 log_file = open(args.logfile, "a")
                 log_file.write(args.dem + ' --------- ' + filename + ' --------- ' + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '\n')
-
 
             tile_counter += 1
 

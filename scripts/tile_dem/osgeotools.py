@@ -10,7 +10,7 @@ try:
 except:
     sys.exit('ERROR: cannot find GDAL/OGR modules')
 
-_version = "0.1.57"
+_version = "0.2.2"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
 _BUFFER = 50  # meters
@@ -159,7 +159,9 @@ def get_band_array_tile(raster, raster_band, xoff, yoff, size):
 
     # Check if band subset has data
     nodata = raster_band["nodata"]
-    if nodata == tile.min() == tile.max():
+    _logger.debug('type(tile): %s', type(tile))
+    _logger.debug('len(tile): %s', len(tile))
+    if len(tile) == 0 or nodata == tile.min() == tile.max():
         _logger.debug("Tile has no data! Skipping.")
         return None
 
