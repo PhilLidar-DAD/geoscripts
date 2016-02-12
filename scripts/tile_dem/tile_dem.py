@@ -11,7 +11,7 @@ import sys
 import tempfile
 import datetime
 
-_version = "0.2.5"
+_version = "0.2.6"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
 _LOG_LEVEL = logging.DEBUG
@@ -56,8 +56,10 @@ tiles from input DEM.",
 projection is the same.")
     parser.add_argument("-o", "--output-dir", required=True,
                         help="Path to output directory.")
+    parser.add_argument("-t", "--temp-dir", required=True,
+                        help="Path to temporary working directory.")
     parser.add_argument("-l", "--logfile", required=True,
-            help="Filename of logfile")
+                        help="Filename of logfile")
     args = parser.parse_args()
     return args
 
@@ -97,8 +99,9 @@ if __name__ == '__main__':
     # Get a temporary file for resampled raster
     random_string = ''.join(random.choice(string.ascii_lowercase +
                                           string.digits) for _ in range(16))
-    resampled_dem_path = os.path.join(tempfile.gettempdir(), "tile_dem_tmp_" +
-                                      random_string)
+    temp_dir = osgeotools.isexists(args.temp_dir)
+    resampled_dem_path = os.path.join(temp_dir,
+                                      "tile_dem_tmp_" + random_string)
     _logger.debug("resample_raster = %s", resampled_dem_path)
     osgeotools.resample_raster(dem, tile_extents, resampled_dem_path)
 
@@ -155,7 +158,8 @@ if __name__ == '__main__':
                 while os.path.exists(tile_path):
                     print '\nWARNING:', tile_path, 'already exists'
                     ctr += 1
-                    filename = filename.replace('.tif','_'+str(ctr)+'.tif')
+                    filename = filename.replace(
+                        '.tif', '_' + str(ctr) + '.tif')
                     tile_path = os.path.join(output_dir, filename)
 
                 # Save new GeoTIFF
@@ -163,7 +167,8 @@ if __name__ == '__main__':
                                         osgeotools.gdalconst.GDT_Float32,
                                         tile_gt, dem, raster_band)
                 log_file = open(args.logfile, "a")
-                log_file.write(args.dem + ' --------- ' + filename + ' --------- ' + datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '\n')
+                log_file.write(args.dem + ' --------- ' + filename + ' --------- ' +
+                               datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '\n')
 
             tile_counter += 1
 
