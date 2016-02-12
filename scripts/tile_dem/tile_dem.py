@@ -11,7 +11,7 @@ import sys
 import tempfile
 import datetime
 
-_version = "0.2.6"
+_version = "0.2.7"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
 _LOG_LEVEL = logging.DEBUG
@@ -56,7 +56,7 @@ tiles from input DEM.",
 projection is the same.")
     parser.add_argument("-o", "--output-dir", required=True,
                         help="Path to output directory.")
-    parser.add_argument("-t", "--temp-dir", required=True,
+    parser.add_argument("-tmp", "--temp-dir", required=True,
                         help="Path to temporary working directory.")
     parser.add_argument("-l", "--logfile", required=True,
                         help="Filename of logfile")
