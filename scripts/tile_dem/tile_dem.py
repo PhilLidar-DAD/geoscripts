@@ -10,7 +10,7 @@ import string
 import sys
 
 
-_version = "0.3.1"
+_version = "0.3.2"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
 _LOG_LEVEL = logging.DEBUG
@@ -38,7 +38,7 @@ def _setup_logging(args):
     _logger.addHandler(ch)
 
     # Setup file logging
-    fh = logging.handlers.FileHandler(args.logfile)
+    fh = logging.FileHandler(args.logfile)
     fh.setLevel(_FILE_LOG_LEVEL)
     fh.setFormatter(formatter)
     _logger.addHandler(fh)
