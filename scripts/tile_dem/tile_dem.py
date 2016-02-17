@@ -8,14 +8,14 @@ import osgeotools
 import random
 import string
 import sys
-import tempfile
-import datetime
 
-_version = "0.2.7"
+
+_version = "0.3.1"
 print os.path.basename(__file__) + ": v" + _version
 _logger = logging.getLogger()
 _LOG_LEVEL = logging.DEBUG
 _CONS_LOG_LEVEL = logging.INFO
+_FILE_LOG_LEVEL = logging.DEBUG
 _TILE_SIZE = 1000
 _BUFFER = 50  # meters
 
@@ -36,6 +36,12 @@ def _setup_logging(args):
     ch.setLevel(_CONS_LOG_LEVEL)
     ch.setFormatter(formatter)
     _logger.addHandler(ch)
+
+    # Setup file logging
+    fh = logging.handlers.FileHandler(args.logfile)
+    fh.setLevel(_FILE_LOG_LEVEL)
+    fh.setFormatter(formatter)
+    _logger.addHandler(fh)
 
 
 def _parse_arguments():
@@ -166,14 +172,11 @@ if __name__ == '__main__':
                 osgeotools.write_raster(tile_path, "GTiff", tile,
                                         osgeotools.gdalconst.GDT_Float32,
                                         tile_gt, dem, raster_band)
-                log_file = open(args.logfile, "a")
-                log_file.write(args.dem + ' --------- ' + filename + ' --------- ' +
-                               datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S') + '\n')
+                _logger.info(args.dem + ' --------- ' + filename + ' --------- ')
 
             tile_counter += 1
 
         # exit(1)
-        log_file.close()
     _logger.info("Total no. of tiles: {0}".format(tile_counter))
 
     # Delete temporary resampled DEM
