@@ -5,6 +5,23 @@ from os.path import isfile, isdir, join
 import argparse, time, os
 from collections import OrderedDict
 from ConfigParser import SafeConfigParser
+import argparse, ConfigParser, os, sys, shutil
+
+CONFIG = ConfigParser.ConfigParser()
+CONFIG.read(os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.ini"))
+
+def build_ceph_dict(config):
+    dict1 = {}
+    options = config.options("ceph")
+    for option in options:
+        try:
+            dict1[option] = config.get("ceph", option)
+            if dict1[option] == -1:
+                print("skip: %s" % option)
+        except:
+            print("exception on %s!" % option)
+            dict1[option] = None
+    return dict1
 
 def get_cwd():
     cur_path = os.path.realpath(__file__)
@@ -43,14 +60,7 @@ activate_this_file = "~/.virtualenvs/geonode/bin/activate_this.py"
 log_filepath = get_cwd()+"logs/bulk_upload.log"
 
 #Ceph Object Gateway Settings
-CEPH_OGW = {
-    'default' : {
-        'USER' : 'geonode:swift',
-        'KEY' : 'OxWZDDFGVvLGUFMFznS2tn3xTKsLcKnghTYArp85',
-        'URL' : 'https://192.168.20.52',
-        'CONTAINER' : 'geo-container',
-    }
-}
+CEPH_OGW = build_ceph_dict(CONFIG)
 
 #Parse CLI arguments
 parser = argparse.ArgumentParser()
@@ -131,11 +141,13 @@ warnings.simplefilter("ignore")
 ########################
 
 uploaded_objects= []
-ceph_client = CephStorageClient(CEPH_OGW['default']['USER'], CEPH_OGW['default']['KEY'], CEPH_OGW['default']['URL'], container_name=CEPH_OGW['default']['CONTAINER'])
-
+ceph_client = CephStorageClient(    CEPH_OGW['user'],
+                                    CEPH_OGW['key'],
+                                    CEPH_OGW['url'],
+                                    container_name=CEPH_OGW['container'])
 #Connect to Ceph Storage
 ceph_client.connect()
-logger.info("Connected to Ceph OGW at URI [{0}]".format(CEPH_OGW['default']['URL']))
+logger.info("Connected to Ceph OGW at URI [{0}]".format(CEPH_OGW['URL']))
 
 #List of allowed file extensions
 allowed_files_exts = ["tif", "laz"]
