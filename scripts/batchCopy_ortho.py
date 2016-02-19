@@ -27,8 +27,7 @@ startTime = time.time()
 
 driver = ogr.GetDriverByName('ESRI Shapefile')
 
-# curr = args.input_directory
-outDir = args.output_folder
+
 
 
 DS = driver.Open(args.input_shapefile)
@@ -39,12 +38,15 @@ geom = feature.GetGeometryRef()
 ctr = 1
 
 for ortho in lstFolder:
+    # curr = args.input_directory
+    outDir = args.output_folder
     srcOrtho = r"/mnt/geostorage/DPC/TERRA/Adjusted_Orthophotos/"
     curr = os.path.join(srcOrtho,prov,ortho)
     
     if os.path.exists(curr):
         print "Copying Adjusted Orthophotos..."
         pass
+        outDir = os.path.join(outDir,"Adjusted")
     else:
         print "Copying Orthophotos..."
         srcOrtho = r"/mnt/geostorage/DPC/TERRA/Photos/"

@@ -21,14 +21,21 @@ lstFolder = str(lasDir).split("\n")
 # Start timing
 startTime = time.time()
 
+srcLAZ = r"Z:\DPC\TERRA\Adjusted_LAZ_Tiles\DREAM"
 srcLAS= r"Z:\DPC\TERRA\LAS_Tiles"
 srcExt = r"LAS_FILES\LAZ"
 for las in lstFolder:
-	fullPath = os.path.join(srcLAS,prov,las,srcExt)
+	fullPath = os.path.join(srcLAZ,prov,las)
+
 	if os.path.exists(fullPath):
 		pass
 	else:
-		fullPath = fullPath.replace('\LAZ','')
+		fullPath = os.path.join(srcLAS,prov,las,srcExt)
+
+		if os.path.exists(fullPath):
+			pass
+		else:
+			fullPath = fullPath.replace('\LAZ','')
 	print fullPath
 	
 	dstFolder = os.path.join(args.output_folder,las)

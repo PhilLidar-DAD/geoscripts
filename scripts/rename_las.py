@@ -11,6 +11,8 @@ parser = argparse.ArgumentParser(description='Rename LAS/LAZ Files')
 parser.add_argument('-i','--input_directory')
 parser.add_argument('-o','--output_directory')
 parser.add_argument('-t','--type')
+parser.add_argument("-ot", "--textfile")
+
 args = parser.parse_args()
 # Start timing
 startTime = time.time()
@@ -26,46 +28,68 @@ if typeFile != "LAS" and typeFile != "LAZ":
 
 driver = ogr.GetDriverByName('ESRI Shapefile')
 
-for las in os.listdir(inDir):
-	inLAS = os.path.join(inDir, las)
 
-	fullCmd = ' '.join(['lasboundary -i', inLAS, '-o temp.shp'])
-	print '\n', fullCmd
+# Loop through the input directory
+for path, dirs, files in os.walk(inDir,topdown=False):
+	for las in files:
+		if las.endswith(".laz"):
+			try:
+				ctr = 0
+				inLAS = os.path.join(path, las)
 
-	subprocess.call(fullCmd,shell=True)
+				# Create temporary shapefile for LAZ's extent
+				fullCmd = ' '.join(['lasboundary -i', inLAS, '-o temp.shp'])
+				print '\n', fullCmd
 
-	inDS = driver.Open('temp.shp',0)
-	inLayer = inDS.GetLayer()
-	extent = inLayer.GetExtent()
+				subprocess.call(fullCmd,shell=True)
 
-	print 'Raw min X', extent[0]
-	print 'Raw max Y', extent[3]
+				# Open the temporary shapefile
+				inDS = driver.Open('temp.shp',0)
+				inLayer = inDS.GetLayer()
+				inFeat = inLayer.GetNextFeature()
+				inGeom = inFeat.GetGeometryRef()
+				inCentroid = inGeom.Centroid()
 
-	if extent[0] % 1000 > 0:
-		flrMinX = int(math.floor(extent[0] * 0.001)*1000)	
-	else:
-		flrMinX = extent[0]
+				inX = inCentroid.GetX()
+				inY = inCentroid.GetY()
+				
+				print 'Centroid X', inX
+				print 'Centroid Y', inY
 
-	if extent[3] % 1000 > 0:
-		flrMaxY = int(math.floor(extent[3] * 0.001)*1000)+1000		
-	else:
-		flrMaxY = extent[3]
+				if inX % 1000 > 0:
+					flrMinX = int(math.floor(inX * 0.001)*1000)	
+				else:
+					flrMinX = inX
 
-	minX = str(int(round(flrMinX*0.001)))
-	maxY = str(int(round(flrMaxY*0.001)))
+				if inY % 1000 > 0:
+					flrMaxY = int(math.floor(inY * 0.001)*1000)+1000		
+				else:
+					flrMaxY = inY
 
-	print 'min X', minX
-	print 'max Y', maxY
+				minX = str(int(round(flrMinX*0.001)))
+				maxY = str(int(round(flrMaxY*0.001)))
 
-	outFN = ''.join(['E',minX,'N',maxY,'_',typeFile,'.',fileExtn])
-	outPath = os.path.join(outDir,outFN)
+				print 'min X', minX
+				print 'max Y', maxY
 
-	if os.path.exists(outPath):
-		print '\nWARNING:', outPath, 'already exists!'
-	else:
-		print outPath, 'copied successfully'
-		shutil.copy(inLAS,outPath)
+				outFN = ''.join(['E',minX,'N',maxY,'_',typeFile,'.',fileExtn])
+				outPath = os.path.join(outDir,outFN)
 
+				# Check if output filename is already exists
+				while os.path.exists(outPath):
+					print '\nWARNING:', outPath, 'already exists!'
+					ctr += 1
+					outFN = ''.join(['E',minX,'N',maxY,'_',typeFile,'_',str(ctr),'.',fileExtn])
+					outPath = os.path.join(outDir,outFN)
+				print os.path.join(path, las), outFN
+				outTextfile = open(args.textfile, "a")
+				outTextfile.write(os.path.join(path, las)+' --------- '+outFN+'\n')
+				print outPath, 'copied successfully'
+				shutil.copy(inLAS,outPath)
+			except:
+				outTextfile.write('Error while copying ' + inLAS + '\n')
+			
+outTextfile.close()
 inDS.Destroy()
 driver.DeleteDataSource('temp.shp')
 
