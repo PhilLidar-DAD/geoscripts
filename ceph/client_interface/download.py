@@ -1,4 +1,4 @@
-import argparse, ConfigParser, os, sys
+import argparse, ConfigParser, os, sys, shutil
 
 CONFIG = ConfigParser.ConfigParser()
 CONFIG.read(os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.ini"))
@@ -131,3 +131,7 @@ if __name__ == "__main__":
         for root, dirs, files in os.walk(tmp_dir):
             for filename in files:
                 gdal_warp(os.path.join(root, filename), os.path.join(dirpath, filename), prj_epsg_num)
+                
+        #Delete temporary folder for ceph objects
+        shutil.rmtree(tmp_dir)
+
