@@ -1,12 +1,22 @@
-import swiftclient, warnings, os, mimetypes
+import swiftclient, warnings, os, mimetypes, ConfigParser
 from pprint import pprint
 from os import listdir
 from os.path import isfile, join
 
+CONFIG = ConfigParser.ConfigParser()
+CONFIG.read(os.path.join(os.path.dirname(os.path.realpath(__file__)), "config.ini"))
 
-user = 'geonode:swift'
-key = 'OxWZDDFGVvLGUFMFznS2tn3xTKsLcKnghTYArp85'
-#key = 'UcRkNyYRmiFUHseH89qFLDSSPy4Rqmsp3tjoyrHm'
+CEPH_OGW=dict()
+options = CONFIG.options("ceph")
+for option in options:
+    try:
+        CEPH_OGW[option] = CONFIG.get("ceph", option)
+        if CEPH_OGW[option] == -1:
+            print("skip: %s" % option)
+    except:
+        print("exception on %s!" % option)
+        CEPH_OGW[option] = None
+
 original_filters = warnings.filters[:]
 
 # Ignore warnings.
@@ -14,9 +24,9 @@ warnings.simplefilter("ignore")
 
 try:
     conn = swiftclient.Connection(
-            user='geonode:swift',
-            key=key,
-            authurl='https://192.168.20.52/auth',
+            user=CEPH_OGW['user'],
+            key=CEPH_OGW['key'],
+            authurl=CEPH_OGW['url'],
             insecure=True,
     )
 
