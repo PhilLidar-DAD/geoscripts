@@ -1,9 +1,11 @@
 [ceph]
-USER = 'geonode:swift'
-KEY  = 'secret_key'
-URL  = 'ceph_uri'
-CONTAINER = 'geo-container'
+USER = geonode:swift
+KEY  = secret_key
+URL  = ceph_uri
+CONTAINER = geo-container
 [env]
-activatethis = '~/.virtualenvs/geonode/bin/activate_this.py'
+activatethis = /home/ken/.virtualenv/geonode/bin/activate_this.py
 [tmp_folder]
-path='/tmp/tmp_ceph_objects/'
+path=/tmp/tmp_ceph_objects/
+[file_types]
+allowed = tif, laz
