@@ -10,7 +10,7 @@ import sys
 parser = argparse.ArgumentParser(description='Rename LAS/LAZ Files')
 parser.add_argument('-i','--input_directory')
 parser.add_argument('-o','--output_directory')
-parser.add_argument('-t','--type')
+#parser.add_argument('-t','--type')
 parser.add_argument("-ot", "--textfile")
 
 args = parser.parse_args()
@@ -19,15 +19,16 @@ startTime = time.time()
 
 inDir = args.input_directory
 outDir = args.output_directory
-typeFile = args.type.upper()
-fileExtn = args.type.lower()
+#typeFile = args.type.upper()
+#fileExtn = args.type.lower()
 
-if typeFile != "LAS" and typeFile != "LAZ":
-	print typeFile, 'is not a supported format'
-	sys.exit()
+#if typeFile != "LAS" and typeFile != "LAZ":
+#	print typeFile, 'is not a supported format'
+#	sys.exit()
 
 driver = ogr.GetDriverByName('ESRI Shapefile')
 
+typeFile = "LAZ"
 
 # Loop through the input directory
 for path, dirs, files in os.walk(inDir,topdown=False):
@@ -72,14 +73,14 @@ for path, dirs, files in os.walk(inDir,topdown=False):
 				print 'min X', minX
 				print 'max Y', maxY
 
-				outFN = ''.join(['E',minX,'N',maxY,'_',typeFile,'.',fileExtn])
+				outFN = ''.join(['E',minX,'N',maxY,'_',typeFile,'.',typeFile.lower()])
 				outPath = os.path.join(outDir,outFN)
 
 				# Check if output filename is already exists
 				while os.path.exists(outPath):
 					print '\nWARNING:', outPath, 'already exists!'
 					ctr += 1
-					outFN = ''.join(['E',minX,'N',maxY,'_',typeFile,'_',str(ctr),'.',fileExtn])
+					outFN = ''.join(['E',minX,'N',maxY,'_',typeFile,'_',str(ctr),'.',typeFile.lower()])
 					outPath = os.path.join(outDir,outFN)
 				print os.path.join(path, las), outFN
 				outTextfile = open(args.textfile, "a")
